@@ -84,7 +84,7 @@ public class Contact implements Serializable {
         return lienGit;
     }
 
-        // Setters
+    // Setters
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -128,7 +128,5 @@ public class Contact implements Serializable {
     public void setLienGit(String lienGit) {
         this.lienGit = lienGit;
     }
-
-
 
 }
