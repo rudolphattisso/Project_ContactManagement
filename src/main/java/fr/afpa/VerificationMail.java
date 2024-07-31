@@ -11,7 +11,7 @@ public class VerificationMail {
     // caractères, et la partie domaine (après le @) doit avoir entre 4 et 255
     // caractères.
     // (?=.{6,320}$) : La longueur totale de l'adresse email doit être comprise
-    // entre 6 et 320 caractères.
+    // entre 6 egit statust 320 caractères.
     // [a-zA-Z0-9._%+-]{1,64} : La partie locale de l'adresse email permet les
     // caractères alphanumériques et certains caractères spéciaux.
     // @[a-zA-Z0-9.-]+ : La partie domaine permet les caractères alphanumériques et
