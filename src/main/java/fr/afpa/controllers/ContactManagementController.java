@@ -6,7 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import fr.afpa.App;
-import fr.afpa.Contact;
+import fr.afpa.models.Contact;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -64,6 +64,7 @@ public class ContactManagementController {
     @FXML
     private TextField lienGitField;
 
+    // actions
     @FXML
     public void jsonExport(ActionEvent event) {
 
