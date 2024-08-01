@@ -101,10 +101,13 @@ public class ContactManagementController {
     @FXML
     public void initialize() {
 
-        contactsListView.add(new Contact("rud", "Ati", "M", "13/08/1990", "RANA", "Boreaux", "0694658452", "",
-                "rudati@gmail.com", "41800", "https://github.com/dashboard"));
-        // contactsListView.add(new Contact());
-        // contactsListView.add(new Contact());
+        contactsListView.add(new Contact("rud", "Ati", "M", "13/08/1990", "RANA", "Bordeaux", "0694644522", "",
+                "rudati@gmail.com", "41800", "https://github.com/d9shboard"));
+        contactsListView.add(new Contact("yreud", "pAorti", "M", "16/07/1991", "Pr2A", "Bordeaux", "0694584523", "",
+                "rudati@gmail.com", "21800", "https://github.com/déshboard"));
+        contactsListView.add(new Contact("rireud", "cecAti", "M", "14/08/1990", "RA.é.NA", "Bordeaux", "0694658452", "",
+                "rudati@gmail.com", "31800", "https://github.com/d0shboard"));
+        
         tableViewContact.setItems(contactsListView);
 
         colGenre.setCellValueFactory(cellData -> cellData.getValue().getGenreProperty());
