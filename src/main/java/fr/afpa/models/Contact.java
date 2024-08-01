@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import fr.afpa.App;
+import javafx.beans.property.SimpleStringProperty;
 
 import java.io.Serializable;
 
@@ -11,7 +12,7 @@ public class Contact implements Serializable {
 
     private static Logger logger = LogManager.getLogger(App.class);
 
-    private String nom;
+    private SimpleStringProperty nom;
     private String prenom;
     private String genre;
     private String dateDeNAissance;
@@ -25,7 +26,7 @@ public class Contact implements Serializable {
 
     public Contact(String nom, String prenom, String genre, String dateDeNAissance, String pseudo, String adresse,
             String telPerso, String telPro, String mail, String codePostale, String lienGit) {
-        this.nom = nom;
+        this.nom = new SimpleStringProperty(nom);
         this.prenom = prenom;
         this.genre = genre;
         this.dateDeNAissance = dateDeNAissance;
@@ -48,7 +49,10 @@ public class Contact implements Serializable {
 
     // getters
     public String getNom() {
-        return nom;
+        return nom.getValue();// pour obtenir un String; car l'attribut à été déclaré en SimpleString Property.
+    }
+    public SimpleStringProperty getNomProperty() {
+        return nom;// pour obtenir  SimpleString Property.
     }
 
     public String getPrenom() {
@@ -93,7 +97,7 @@ public class Contact implements Serializable {
 
     // Setters
     public void setNom(String nom) {
-        this.nom = nom;
+        this.nom.setValue(nom); // changer la valeur du string property
     }
 
     public void setPrenom(String prenom) {

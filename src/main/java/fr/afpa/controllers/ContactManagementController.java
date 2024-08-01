@@ -7,6 +7,8 @@ import org.apache.logging.log4j.Logger;
 
 import fr.afpa.App;
 import fr.afpa.models.Contact;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,7 +19,9 @@ import javafx.scene.control.TextField;
 public class ContactManagementController {
 
     private static Logger logger = LogManager.getLogger(App.class);
+
     // tableView
+
     @FXML
     private TableView<Contact> tableViewContact;
     @FXML
@@ -77,7 +81,8 @@ public class ContactManagementController {
 
     @FXML
     public void creer(ActionEvent event) {
-
+    // verifier au fil de la saisie sur les champs mail et lient git que le format est correcte
+    //avec les méthodes de verification mail et URL.
     }
 
     @FXML
@@ -88,6 +93,24 @@ public class ContactManagementController {
     @FXML
     public void supprimer(ActionEvent event) {
 
+    }
+
+    private ObservableList<Contact> contactsListView = FXCollections.observableArrayList();
+   
+    @FXML
+    public void initialize() {
+
+        contactsListView.add(new Contact("rud","Ati","M","13/08/1990","RANA","Boreaux","0694658452","","rudati@gmail.com","41800","https://github.com/dashboard"));
+        // contactsListView.add(new Contact());
+        // contactsListView.add(new Contact());
+        tableViewContact.setItems(contactsListView);
+
+        colNom.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
+        // colPrenom.setCellValueFactory(cellData -> cellData.getValue().getPrenom());
+        // colNom.setCellValueFactory(cellData -> cellData.getValue().getNom());
+        // colMail.setCellValueFactory(cellData -> cellData.getValue().getMail());
+        // colTel.setCellValueFactory(cellData -> cellData.getValue().getTelPerso());
+        
     }
 
 }
