@@ -1,8 +1,15 @@
-package fr.afpa;
+package fr.afpa.models;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import fr.afpa.App;
 
 import java.io.Serializable;
 
 public class Contact implements Serializable {
+
+    private static Logger logger = LogManager.getLogger(App.class);
 
     private String nom;
     private String prenom;
@@ -84,7 +91,7 @@ public class Contact implements Serializable {
         return lienGit;
     }
 
-        // Setters
+    // Setters
     public void setNom(String nom) {
         this.nom = nom;
     }
@@ -128,7 +135,5 @@ public class Contact implements Serializable {
     public void setLienGit(String lienGit) {
         this.lienGit = lienGit;
     }
-
-
 
 }
