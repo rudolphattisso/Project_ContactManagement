@@ -8,7 +8,8 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
 
     @Override
     public String load(String filePath) {
-        // TODO Auto-generated method stub
+        
+
         throw new UnsupportedOperationException("Unimplemented method 'load'");
     }
 

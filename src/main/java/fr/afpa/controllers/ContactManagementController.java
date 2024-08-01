@@ -71,18 +71,19 @@ public class ContactManagementController {
     // actions
     @FXML
     public void jsonExport(ActionEvent event) {
-    //Instancier ContactJsonSerializer    
+        // Instancier ContactJsonSerializer
     }
 
     @FXML
     public void vCardExport(ActionEvent event) {
-    //Instancier ContactVCardSerializer 
+        // Instancier ContactVCardSerializer
     }
 
     @FXML
     public void creer(ActionEvent event) {
-    // verifier au fil de la saisie sur les champs mail et lient git que le format est correcte
-    //avec les méthodes de verification mail et URL.
+        // verifier au fil de la saisie sur les champs mail et lient git que le format
+        // est correcte
+        // avec les méthodes de verification mail et URL.
     }
 
     @FXML
@@ -96,21 +97,22 @@ public class ContactManagementController {
     }
 
     private ObservableList<Contact> contactsListView = FXCollections.observableArrayList();
-   
+
     @FXML
     public void initialize() {
 
-        contactsListView.add(new Contact("rud","Ati","M","13/08/1990","RANA","Boreaux","0694658452","","rudati@gmail.com","41800","https://github.com/dashboard"));
+        contactsListView.add(new Contact("rud", "Ati", "M", "13/08/1990", "RANA", "Boreaux", "0694658452", "",
+                "rudati@gmail.com", "41800", "https://github.com/dashboard"));
         // contactsListView.add(new Contact());
         // contactsListView.add(new Contact());
         tableViewContact.setItems(contactsListView);
 
+        colGenre.setCellValueFactory(cellData -> cellData.getValue().getGenreProperty());
         colNom.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
-        // colPrenom.setCellValueFactory(cellData -> cellData.getValue().getPrenom());
-        // colNom.setCellValueFactory(cellData -> cellData.getValue().getNom());
-        // colMail.setCellValueFactory(cellData -> cellData.getValue().getMail());
-        // colTel.setCellValueFactory(cellData -> cellData.getValue().getTelPerso());
-        
+        colPrenom.setCellValueFactory(cellData -> cellData.getValue().getPrenomProperty());
+        colMail.setCellValueFactory(cellData -> cellData.getValue().getMailProperty());
+        colTel.setCellValueFactory(cellData -> cellData.getValue().getTelPersoProperty());
+
     }
 
 }
