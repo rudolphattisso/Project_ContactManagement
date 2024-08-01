@@ -67,12 +67,12 @@ public class ContactManagementController {
     // actions
     @FXML
     public void jsonExport(ActionEvent event) {
-
+    //Instancier ContactJsonSerializer    
     }
 
     @FXML
     public void vCardExport(ActionEvent event) {
-
+    //Instancier ContactVCardSerializer 
     }
 
     @FXML

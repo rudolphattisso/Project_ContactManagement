@@ -1,4 +1,4 @@
-package fr.afpa;
+package fr.afpa.tools;
 
 import java.util.ArrayList;
 

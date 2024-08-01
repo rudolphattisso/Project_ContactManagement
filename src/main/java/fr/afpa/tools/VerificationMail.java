@@ -1,4 +1,4 @@
-package fr.afpa;
+package fr.afpa.tools;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -1,4 +1,4 @@
-package fr.afpa;
+package fr.afpa.tools;
 import java.util.regex.*;
 
 public class VerificationUrl {
@@ -16,10 +16,10 @@ public class VerificationUrl {
         return matcher.matches();
     }
 
-    public static void main(String[] args) {
-        String url = "https://example.com";
-        System.out.println("Is URL valid? " + isValidURL(url));
-    }
+    // public static void main(String[] args) {
+    //     String url = "https://example.com";
+    //     System.out.println("Is URL valid? " + isValidURL(url));
+    // }
 
 
 
