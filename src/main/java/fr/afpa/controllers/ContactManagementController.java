@@ -1,5 +1,6 @@
 package fr.afpa.controllers;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.apache.logging.log4j.LogManager;
@@ -7,12 +8,16 @@ import org.apache.logging.log4j.Logger;
 
 import fr.afpa.App;
 import fr.afpa.models.Contact;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 public class ContactManagementController {
 
@@ -67,12 +72,25 @@ public class ContactManagementController {
     // actions
     @FXML
     public void jsonExport(ActionEvent event) {
-    //Instancier ContactJsonSerializer    
+        // Instancier ContactJsonSerializer
     }
 
     @FXML
     public void vCardExport(ActionEvent event) {
-    //Instancier ContactVCardSerializer 
+        ContactvCardSerializer vCardSerializer = new ContactvCardSerializer();
+        // Instancier ContactVCardSerializer
+        // Créez un exemple de contact pour l'exportation
+
+        // Utilisez un FileChooser pour choisir l'emplacement de sauvegarde
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Sauvgarde Contact en fichier vCard");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("vCard Files", "*.vcf"));
+        File file = fileChooser.showSaveDialog(new Stage());
+
+        if (file != null) {
+            vCardSerializer.save(file.getAbsolutePath(), null);
+            System.out.println("Contact exported as vCard");
+        }
     }
 
     @FXML
@@ -90,4 +108,19 @@ public class ContactManagementController {
 
     }
 
+    private ObservableList<Contact> contactsListView = FXCollections.observableArrayList();
+
+    @FXML
+    public void initialize() {
+        Contact contact1 = new Contact("You", "Las", "M", "25/07/1987", "You", "2 passage des arceaux", "0651712919",
+                "0632067946", "Lamazir@gmail.com", "33450", "https://github.com/LasriYoussef");
+        contactsListView.add(contact1);
+        tableViewContact.setItems(contactsListView);
+        colGenre.setCellValueFactory(cellData -> cellData.getValue().getGenreProperty());
+        colNom.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
+        colPrenom.setCellValueFactory(cellData -> cellData.getValue().getPrenomProperty());
+        colMail.setCellValueFactory(cellData -> cellData.getValue().getMailProperty());
+        colTel.setCellValueFactory(cellData -> cellData.getValue().getTelPersoProperty());
+    }
+    
 }
