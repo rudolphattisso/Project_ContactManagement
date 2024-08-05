@@ -1,39 +1,49 @@
 package fr.afpa.tools;
 
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
+
 import java.util.ArrayList;
+
+import com.github.cliftonlabs.json_simple.JsonArray;
+import com.github.cliftonlabs.json_simple.JsonObject;
+import com.github.cliftonlabs.json_simple.Jsoner;
 
 import fr.afpa.models.Contact;
 
-public class ContactJsonSerializer implements Serializer<Contact>{
+public class ContactJsonSerializer implements Serializer<Contact> {
 
+    // Sauvegarder une liste contacts dans un fichier JSON
     @Override
-    public void saveList(String filesPath, ArrayList<Contact> objectsToSave) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveList'");
+    public void saveList(String filesPath, ArrayList<Contact> contactsToSave) {
+        // JSON String
+
+        JsonArray contactsJsonArray = new JsonArray(contactsToSave);
+
+        try (FileWriter fileWriter = new FileWriter("contacts.json")) {
+
+            Jsoner.serialize(contactsJsonArray, fileWriter);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
+    /**
+     * Sauvegarder un seul contact dans un fichier JSON
+     */
     @Override
-    public void save(String filePath, Contact objet) {
-        // TODO Auto-generated method stub
-//         try {
-//             FileOutputStream fos = new FileOutputStream(fileName);
-//             ObjectOutputStream oos = new ObjectOutputStream(fos);
-//             // sérialisation : écriture de l'objet dans le flux de sortie
-//             oos.writeObject(contactToSerialize);
-//             // on vide le tampon
-//             oos.flush();
-//             System.out.println(contactToSerialize + " a ete serialise");
-//             oos.close();
-//             fos.close();
-//         } catch (IOException ioe) {
-//             ioe.printStackTrace();
-//         }
-//         throw new UnsupportedOperationException("Unimplemented method 'save'");
-    
-      
-}
+    public void save(String filePath, Contact contact) {
+
+
+        try (FileWriter fileWriter = new FileWriter(filePath)) {
+
+            Jsoner.serialize(contact, fileWriter);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 }
