@@ -15,7 +15,7 @@
    <children>
       <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
          <children>
-            <Label text="Contacts">
+            <Label text="Liste de Contacts">
                <font>
                   <Font size="21.0" />
                </font>
@@ -62,7 +62,7 @@
       </VBox>
       <VBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="501.0" prefWidth="600.0">
          <children>
-            <Label text="Nom">
+            <Label text="Nom*">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
@@ -72,7 +72,7 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </TextField>
-            <Label text="Prénom">
+            <Label text="Prénom*">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
@@ -82,7 +82,7 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </TextField>
-            <Label text="Genre">
+            <Label text="Genre*">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
@@ -92,7 +92,7 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </TextField>
-            <Label text="Date de naissance">
+            <Label text="Date de naissance*">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>

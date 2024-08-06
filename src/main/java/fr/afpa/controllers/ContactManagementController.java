@@ -209,7 +209,21 @@ public class ContactManagementController {
 
     @FXML
     public void modifier(ActionEvent event) {
-        tableViewContact.getSelectionModel().getSelectedItem();
+        //selection du contact dans la liste et stockage dans la variable
+        Contact selectedContact=tableViewContact.getSelectionModel().getSelectedItem();
+        //suppression du contact:
+        tableViewContact.getItems().remove(selectedContact);
+        //envoi des valeur du contacts dans les champs:
+        nomField.setText(selectedContact.getNom());
+        prenomField.setText(selectedContact.getPrenom());
+        genreField.setText(selectedContact.getGenre());
+        dateDeNaissanceField.setText(selectedContact.getDateDeNaissance());
+        pseudoField.setText(selectedContact.getPseudo());
+        adresseField.setText(selectedContact.getAdresse());
+        numPersoField.setText(selectedContact.getTelPerso());
+        numProField.setText(selectedContact.getTelPro());
+        mailField.setText(selectedContact.getMail());
+        lienGitField.setText(selectedContact.getLienGit());
 
     }
 
