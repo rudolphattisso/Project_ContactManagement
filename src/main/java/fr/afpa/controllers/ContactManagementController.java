@@ -11,7 +11,6 @@ import fr.afpa.tools.ContactBinarySerializer;
 import fr.afpa.tools.ContactJsonSerializer;
 import fr.afpa.tools.VerificationMail;
 import fr.afpa.tools.VerificationUrl;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -27,7 +26,7 @@ import javafx.scene.control.TextField;
 public class ContactManagementController {
 
     private static Logger logger = LogManager.getLogger(App.class);
-
+    // faire le lien entre les fichiers le controlleur et la vue ContactManagaement
     // tableView
 
     @FXML
@@ -102,6 +101,13 @@ public class ContactManagementController {
 
     }
 
+    /**
+     * Méthode qui se déclenche sur un clic sur le bouton "Export JSon"
+     * 
+     * @param event Objet de la classe "ActionEvent" qui stocke les informations sur
+     *              l'évènement en question
+     */
+
     @FXML
     public void vCardExport(ActionEvent event) {
 
@@ -118,6 +124,9 @@ public class ContactManagementController {
     private ObservableList<Contact> contactsListView = FXCollections.observableArrayList(); // Observable liste pour
                                                                                             // stocker les contacts
 
+    /**
+     * méthode qui se lance dès le lancement du logiciel.
+     */
     @FXML
     public void initialize() {
 
@@ -129,24 +138,8 @@ public class ContactManagementController {
 
         tableViewContact.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
-        // // instanciation contacts
-        // Contact contactRud = new Contact("rud", "Ati", "M", "13/08/1990", "RANA",
-        // "Bordeaux", "0694644522", "",
-        // "rudati@gmail.com", "41800", "https://github.com/d9shboard");
-
-        // Contact contactYreud = new Contact("yreud", "pAorti", "M", "16/07/1991",
-        // "Pr2A", "Bordeaux", "0694584523", "",
-        // "rudati@gmail.com", "21800", "https://github.com/déshboard");
-        // Contact contactRireud = new Contact("rireud", "cecAti", "M", "14/08/1990",
-        // "RA.é.NA", "Bordeaux", "0694658452",
-        // "",
-        // "rudati@gmail.com", "31800", "https://github.com/d0shboard");
-
-        // contactsListView.add(contactRud);
-        // contactsListView.add(contactYreud);
-        // contactsListView.add(contactRireud);
-
-        // lien entre liste existante et le tableau
+        // création du lien entre l'élement graphique TableView et le
+        // tableau(ObservableList).
         tableViewContact.setItems(contactsListView);
 
         // aujout
@@ -158,19 +151,34 @@ public class ContactManagementController {
 
     }
 
+    /**
+     * Méthode permettant rajouter un contact à la liste de contacts;
+     * elle verifie aussi le format de contenu du champ du mail et de l'url.
+     * elle utilise aussi la serialisation binaire afin d'enreigistrer la liste
+     * de contacts;
+     * 
+     * @param event : Objet de la classe "ActionEvent" qui stocke les informations
+     *              sur
+     *              l'évènement en question
+     */
     @FXML
     public void creer(ActionEvent event) {
-        // verifier au fil de la saisie sur les champs mail et lient git que le format
-        // est correcte
-        // avec les méthodes de verification mail et URL.
+        // déclaration des variables dans lesquelles seront stockées le contenu de
+        // champs
+        // mail et url avant vérification.
         String mailValide = null;
         String urlValide = null;
+
+        // processus de verification des champs qui utiliseront les classes qui
+        // contiennent*
+        // les méthodes de vérificatoin
         Boolean checkMail = VerificationMail.isValidEmail(mailField.getText());
         Boolean checkUrl = VerificationUrl.isValidURL(lienGitField.getText());
+        // cas ou les contenus des champs sont valides.
         if (checkMail == true && checkUrl == true) {
             mailValide = mailField.getText();
             urlValide = lienGitField.getText();
-
+            // création du contact;
             Contact contact = new Contact(nomField.getText(), prenomField.getText(), genreField.getText(),
                     dateDeNaissanceField.getText(), pseudoField.getText(), adresseField.getText(),
                     numPersoField.getText(),
@@ -180,7 +188,8 @@ public class ContactManagementController {
             // serialisation binaire des contacts:
             ContactBinarySerializer serializer = new ContactBinarySerializer();
             serializer.saveList("contact.ser", new ArrayList<Contact>(contactsListView));
-
+            // suppression du style CSS qui s'active en cas d'erreur appliqué au champs lors
+            // d'une saisie précédente
             mailField.getStyleClass().remove("error-field");
             lienGitField.getStyleClass().remove("error-field");
             // retirer supprimer les infos des champs après ajout du contact
@@ -194,7 +203,7 @@ public class ContactManagementController {
             numProField.setText("");
             mailField.setText("");
             lienGitField.setText("");
-
+            // cas du formats d'url et mail faux
         } else {
             if (checkMail == false) {
                 mailField.getStyleClass().add("error-field");
@@ -207,13 +216,20 @@ public class ContactManagementController {
         logger.info("click créer");
     }
 
+    /**
+     * Méthode permettant modifier un contact selectionné dans la liste,
+     * 
+     * @param event : : Objet de la classe "ActionEvent" qui stocke les informations
+     *              sur
+     *              l'évènement en question
+     */
     @FXML
     public void modifier(ActionEvent event) {
-        //selection du contact dans la liste et stockage dans la variable
-        Contact selectedContact=tableViewContact.getSelectionModel().getSelectedItem();
-        //suppression du contact:
+        // selection du contact dans la liste et stockage dans une variable
+        Contact selectedContact = tableViewContact.getSelectionModel().getSelectedItem();
+        // suppression du contact:
         tableViewContact.getItems().remove(selectedContact);
-        //envoi des valeur du contacts dans les champs:
+        // envoi des valeur du contacts dans les champs:
         nomField.setText(selectedContact.getNom());
         prenomField.setText(selectedContact.getPrenom());
         genreField.setText(selectedContact.getGenre());
@@ -227,6 +243,14 @@ public class ContactManagementController {
 
     }
 
+    /**
+     * Méthode permettant de supprimer un contact dans la liste. elle utilise aussi
+     * la serialisation binaire afin d'enreigistrer la liste de contacts;
+     * 
+     * @param event : : Objet de la classe "ActionEvent" qui stocke les informations
+     *              sur
+     *              l'évènement en question
+     */
     @FXML
     public void supprimer(ActionEvent event) {
 
@@ -240,9 +264,10 @@ public class ContactManagementController {
 
             if (alert.showAndWait().get() == ButtonType.OK) {
                 tableViewContact.getItems().remove(selectedItem);
-                            //serialisation binaire des contacts:
-            ContactBinarySerializer serializer =  new ContactBinarySerializer();
-            serializer.saveList("contact.ser", new ArrayList<Contact>(contactsListView) );
+
+                // serialisation binaire des contacts:
+                ContactBinarySerializer serializer = new ContactBinarySerializer();
+                serializer.saveList("contact.ser", new ArrayList<Contact>(contactsListView));
             }
         }
     }

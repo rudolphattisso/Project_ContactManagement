@@ -165,7 +165,7 @@
             <Region minHeight="20.0" prefHeight="200.0" prefWidth="200.0" />
             <HBox accessibleRole="CHECK_BOX" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="BoutonCreer" layoutX="5.0" layoutY="6.0" mnemonicParsing="false" onAction="#creer" text="Créer">
+                  <Button fx:id="BoutonCreer" layoutX="5.0" layoutY="6.0" mnemonicParsing="false" onAction="#creer" text="Créer | Save">
                      <HBox.margin>
                         <Insets right="25.0" top="10.0" />
                      </HBox.margin>
