@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 import fr.afpa.App;
 import fr.afpa.models.Contact;
+import fr.afpa.tools.ContactvCardSerializer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -75,23 +76,33 @@ public class ContactManagementController {
         // Instancier ContactJsonSerializer
     }
 
-    @FXML
-    public void vCardExport(ActionEvent event) {
-        ContactvCardSerializer vCardSerializer = new ContactvCardSerializer();
-        // Instancier ContactVCardSerializer
-        // Créez un exemple de contact pour l'exportation
+   @FXML
+public void vCardExport(ActionEvent event) {
+    ContactvCardSerializer vCardSerializer = new ContactvCardSerializer();
 
-        // Utilisez un FileChooser pour choisir l'emplacement de sauvegarde
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Sauvgarde Contact en fichier vCard");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("vCard Files", "*.vcf"));
-        File file = fileChooser.showSaveDialog(new Stage());
+    // Sélectionner le contact à exporter
+    Contact selectedContact = tableViewContact.getSelectionModel().getSelectedItem();
+    if (selectedContact == null) {
+        System.out.println("Aucun contact sélectionné");
+        return;
+    }
 
-        if (file != null) {
-            vCardSerializer.save(file.getAbsolutePath(), null);
+    // Utilisez un FileChooser pour choisir l'emplacement de sauvegarde
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Sauvegarde Contact en fichier vCard");
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("vCard Files", "*.vcf"));
+    File file = fileChooser.showSaveDialog(new Stage());
+
+    if (file != null) {
+        try {
+            vCardSerializer.save(file.getAbsolutePath(), selectedContact);
             System.out.println("Contact exported as vCard");
+        } catch (IOException e) {
+            logger.error("Erreur lors de l'exportation du contact en vCard", e);
         }
     }
+}
+
 
     @FXML
     public void creer(ActionEvent event) {
@@ -108,19 +119,20 @@ public class ContactManagementController {
 
     }
 
-    private ObservableList<Contact> contactsListView = FXCollections.observableArrayList();
+    // private ObservableList<Contact> contactsListView = FXCollections.observableArrayList();
 
-    @FXML
-    public void initialize() {
-        Contact contact1 = new Contact("You", "Las", "M", "25/07/1987", "You", "2 passage des arceaux", "0651712919",
-                "0632067946", "Lamazir@gmail.com", "33450", "https://github.com/LasriYoussef");
-        contactsListView.add(contact1);
-        tableViewContact.setItems(contactsListView);
-        colGenre.setCellValueFactory(cellData -> cellData.getValue().getGenreProperty());
-        colNom.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
-        colPrenom.setCellValueFactory(cellData -> cellData.getValue().getPrenomProperty());
-        colMail.setCellValueFactory(cellData -> cellData.getValue().getMailProperty());
-        colTel.setCellValueFactory(cellData -> cellData.getValue().getTelPersoProperty());
-    }
+    // @FXML
+    // public void initialize() {
+        //
+    //     Contact contact1 = new Contact("You", "Las", "M", "25/07/1987", "You", "2 passage des arceaux", "0651712919",
+    //             "0632067946", "Lamazir@gmail.com", "33450", "https://github.com/LasriYoussef");
+    //     contactsListView.add(contact1);
+    //     tableViewContact.setItems(contactsListView);
+    //     colGenre.setCellValueFactory(cellData -> cellData.getValue().getGenreProperty());
+    //     colNom.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
+    //     colPrenom.setCellValueFactory(cellData -> cellData.getValue().getPrenomProperty());
+    //     colMail.setCellValueFactory(cellData -> cellData.getValue().getMailProperty());
+    //     colTel.setCellValueFactory(cellData -> cellData.getValue().getTelPersoProperty());
+    // }
     
 }
