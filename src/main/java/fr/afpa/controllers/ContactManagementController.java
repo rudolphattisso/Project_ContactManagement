@@ -1,6 +1,5 @@
 package fr.afpa.controllers;
 
-
 import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
@@ -24,7 +23,6 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-
 
 public class ContactManagementController {
 
@@ -127,7 +125,7 @@ public class ContactManagementController {
 
         ArrayList<Contact> deserializedContacts = binaryDeserializer.loadList("contact.ser");
 
-    contactsListView.addAll(deserializedContacts);
+        contactsListView.addAll(deserializedContacts);
 
         tableViewContact.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -179,12 +177,24 @@ public class ContactManagementController {
                     numProField.getText(), mailValide, adresseField.getText(), urlValide);
             contactsListView.add(contact);
 
-            //serialisation binaire des contacts:
-            ContactBinarySerializer serializer =  new ContactBinarySerializer();
-            serializer.saveList("contact.ser", new ArrayList<Contact>(contactsListView) );
+            // serialisation binaire des contacts:
+            ContactBinarySerializer serializer = new ContactBinarySerializer();
+            serializer.saveList("contact.ser", new ArrayList<Contact>(contactsListView));
 
             mailField.getStyleClass().remove("error-field");
             lienGitField.getStyleClass().remove("error-field");
+            // retirer supprimer les infos des champs après ajout du contact
+            nomField.setText("");
+            prenomField.setText("");
+            genreField.setText("");
+            dateDeNaissanceField.setText("");
+            pseudoField.setText("");
+            adresseField.setText("");
+            numPersoField.setText("");
+            numProField.setText("");
+            mailField.setText("");
+            lienGitField.setText("");
+
         } else {
             if (checkMail == false) {
                 mailField.getStyleClass().add("error-field");
@@ -199,20 +209,27 @@ public class ContactManagementController {
 
     @FXML
     public void modifier(ActionEvent event) {
+        tableViewContact.getSelectionModel().getSelectedItem();
 
     }
 
     @FXML
     public void supprimer(ActionEvent event) {
 
-                // Confirmation pop-up
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to quit?",
-                ButtonType.YES, ButtonType.NO);
-        alert.showAndWait();
+        Contact selectedItem = tableViewContact.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            // Boîte de dialogue de confirmation
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation de suppression");
+            alert.setHeaderText("Êtes-vous sûr de vouloir supprimer cet élément ?");
+            alert.setContentText("Cette action est irréversible.");
 
-        if (alert.getResult() == ButtonType.YES) {
-            Platform.exit();
+            if (alert.showAndWait().get() == ButtonType.OK) {
+                tableViewContact.getItems().remove(selectedItem);
+                            //serialisation binaire des contacts:
+            ContactBinarySerializer serializer =  new ContactBinarySerializer();
+            serializer.saveList("contact.ser", new ArrayList<Contact>(contactsListView) );
+            }
         }
-    }
     }
 }

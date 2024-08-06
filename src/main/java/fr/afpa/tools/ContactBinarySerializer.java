@@ -93,7 +93,3 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
 
 }
 
-// Contact contact = new Contact("rud", "Ati", "M", "13/08/1990", "RANA",
-// "Bordeaux", "0694644522", "",
-// "rudati@gmail.com", "41800", "https://github.com/d9shboard");
-// Contact.serialize(contact, "contactu");
