@@ -173,5 +173,19 @@ public class Contact implements Serializable {
     public void setLienGit(SimpleStringProperty lienGit) {
         this.lienGit = lienGit;
     }
-
+    public String toVCard() {
+        StringBuilder vcard = new StringBuilder();
+        vcard.append("BEGIN:VCARD\n");
+        vcard.append("VERSION:4.0\n");
+        vcard.append("N:").append(nom.getValue()).append(";").append(prenom.getValue()).append("\n");
+        vcard.append("FN:").append(prenom.getValue()).append(" ").append(nom.getValue()).append("\n");
+        vcard.append("EMAIL:").append(mail.getValue()).append("\n");
+        vcard.append("TEL;TYPE=CELL:").append(telPerso.getValue()).append("\n");
+        vcard.append("TEL;TYPE=WORK:").append(telPro.getValue()).append("\n");
+        vcard.append("ADR:").append(adresse.getValue()).append(";").append(codePostale.getValue()).append("\n");
+        vcard.append("BDAY:").append(dateDeNAissance.getValue()).append("\n");
+        vcard.append("URL:").append(lienGit.getValue()).append("\n");
+        vcard.append("END:VCARD");
+        return vcard.toString();
+    }
 }

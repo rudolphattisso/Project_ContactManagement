@@ -76,33 +76,35 @@ public class ContactManagementController {
         // Instancier ContactJsonSerializer
     }
 
-   @FXML
-public void vCardExport(ActionEvent event) {
-    ContactvCardSerializer vCardSerializer = new ContactvCardSerializer();
+    @FXML
+    public void vCardExport(ActionEvent event) {
+        ContactvCardSerializer vCardSerializer = new ContactvCardSerializer();
 
-    // Sélectionner le contact à exporter
-    Contact selectedContact = tableViewContact.getSelectionModel().getSelectedItem();
-    if (selectedContact == null) {
-        System.out.println("Aucun contact sélectionné");
-        return;
-    }
-
-    // Utilisez un FileChooser pour choisir l'emplacement de sauvegarde
-    FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Sauvegarde Contact en fichier vCard");
-    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("vCard Files", "*.vcf"));
-    File file = fileChooser.showSaveDialog(new Stage());
-
-    if (file != null) {
-        try {
-            vCardSerializer.save(file.getAbsolutePath(), selectedContact);
-            System.out.println("Contact exported as vCard");
-        } catch (IOException e) {
-            logger.error("Erreur lors de l'exportation du contact en vCard", e);
+        // Sélectionner le contact à exporter
+        Contact selectedContact = tableViewContact.getSelectionModel().getSelectedItem();
+        if (selectedContact == null) {
+            System.out.println("Aucun contact sélectionné");
+            return;
+        }else {
+            vCardSerializer.save(selectedContact.getGenre() + selectedContact.getNom() + selectedContact.getPrenom() + ".vcf", selectedContact);
         }
-    }
-}
 
+        // // Utilisez un FileChooser pour choisir l'emplacement de sauvegarde
+        // FileChooser fileChooser = new FileChooser();
+        // fileChooser.setTitle("Sauvegarde Contact en fichier vCard");
+        // fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("vCard
+        // Files", "*.vcf"));
+        // File file = fileChooser.showSaveDialog(new Stage());
+
+        // if (file != null) {
+        // try {
+        // vCardSerializer.save(file.getAbsolutePath(), selectedContact);
+        // System.out.println("Contact exported as vCard");
+        // } catch (Exception e) {
+        // logger.error("Erreur lors de l'exportation du contact en vCard", e);
+        // }
+        // }
+    }
 
     @FXML
     public void creer(ActionEvent event) {
@@ -119,20 +121,22 @@ public void vCardExport(ActionEvent event) {
 
     }
 
-    // private ObservableList<Contact> contactsListView = FXCollections.observableArrayList();
+    private ObservableList<Contact> contactsListView = FXCollections.observableArrayList();
 
-    // @FXML
-    // public void initialize() {
-        //
-    //     Contact contact1 = new Contact("You", "Las", "M", "25/07/1987", "You", "2 passage des arceaux", "0651712919",
-    //             "0632067946", "Lamazir@gmail.com", "33450", "https://github.com/LasriYoussef");
-    //     contactsListView.add(contact1);
-    //     tableViewContact.setItems(contactsListView);
-    //     colGenre.setCellValueFactory(cellData -> cellData.getValue().getGenreProperty());
-    //     colNom.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
-    //     colPrenom.setCellValueFactory(cellData -> cellData.getValue().getPrenomProperty());
-    //     colMail.setCellValueFactory(cellData -> cellData.getValue().getMailProperty());
-    //     colTel.setCellValueFactory(cellData -> cellData.getValue().getTelPersoProperty());
-    // }
-    
+    @FXML
+    public void initialize() {
+
+        Contact contact1 = new Contact("Las", "You", "M", "25/07/1987", "You", "2 passage des arceaux", "0651712919",
+                "0632067946", "Lamazir@gmail.com", "33450", "https://github.com/LasriYoussef");
+        contactsListView.add(contact1);
+        tableViewContact.setItems(contactsListView);
+        colGenre.setCellValueFactory(cellData -> cellData.getValue().getGenreProperty());
+        colNom.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
+        colPrenom.setCellValueFactory(cellData -> cellData.getValue().getPrenomProperty());
+        colMail.setCellValueFactory(cellData -> cellData.getValue().getMailProperty());
+        colTel.setCellValueFactory(cellData -> cellData.getValue().getTelPersoProperty());
+        ContactvCardSerializer vCardSerializer = new ContactvCardSerializer();
+        vCardSerializer.serialize(contact1);
+    }
+
 }

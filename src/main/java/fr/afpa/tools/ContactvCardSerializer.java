@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import fr.afpa.models.Contact;
@@ -14,37 +18,6 @@ public class ContactvCardSerializer implements Serializer<Contact> {
 
     public void serialize(Contact contact) {
 
-        /// 1 construire la chaîne de caractères correspondant au contenu vCard
-        String vCardContent = "BEGIN:VCARD\nVERSION:4.0" + "\n";
-
-        // Construction du nom
-        vCardContent = vCardContent + "N:" + contact.getNom() + ";" + contact.getPrenom() + ";" + contact.getGenre()
-                + "\n";
-
-        // Construction du "full name"
-        vCardContent = vCardContent + "FN:" + contact.getPrenom() + " " + contact.getNom() + "\n";
-
-        // Construction du "birtday"
-        vCardContent = vCardContent + "BIRTHDAY" + contact.getDateDeNAissance() + "\n";
-
-        // // Construction de "organization"
-        // vCardContent = vCardContent + "ORG" + contact.getOrganization() + "\n";
-
-        // Construction du "tel;type=persnum"
-        vCardContent = vCardContent + "TEL;TYPE=persnum, voice;VALUE=uri" + contact.getTelPerso() + " "
-                + contact.getCodePostale() + "\n";
-
-        // Construction du "tel;type=pronum"
-        vCardContent = vCardContent + "TEL;TYPE=worknum, voice; VALUE=uri" + contact.getTelPro() + "\n";
-
-        // Construction du "adress"
-        vCardContent = vCardContent + "ADR;TYPE=HOME; PREF=1; LABEL" + contact.getAdresse() + "\n";
-
-        // Construction du "email"
-        vCardContent = vCardContent + "EMAIL" + contact.getMail() + "\n";
-
-        // Construction "link git"
-        vCardContent = vCardContent + "LINKGIT" + contact.getMail() + "\n";
     }
 
     // Paramètres : filesPath (chemin du fichier) et objectsToSave (liste d'objets
@@ -123,14 +96,56 @@ public class ContactvCardSerializer implements Serializer<Contact> {
     // Gestion des exceptions : try-with-resources pour fermer automatiquement les
     // flux et catch pour capturer et imprimer les erreurs d'entrée/sortie.
     @Override
-    public void save(String filesPath, @SuppressWarnings("exports") Contact object) {
-        try (FileOutputStream fileOut = new FileOutputStream(filesPath);
-                ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
-            out.writeObject(object);
-            System.out.println("Contact has been saved to " + filesPath);
-        } catch (IOException i) {
-            i.printStackTrace();
+    public void save(String filesPath, Contact contact) {
+        /// 1 construire la chaîne de caractères correspondant au contenu vCard
+        String vCardContent = "BEGIN:VCARD\nVERSION:4.0" + "\n";
+
+        // Construction du nom
+        vCardContent = vCardContent + "N:" + contact.getNom() + ";" + contact.getPrenom() + ";;" + contact.getGenre()
+                + ";" + "\n";
+
+        // Construction du "full name"
+        vCardContent = vCardContent + "FN:" + contact.getPrenom() + " " + contact.getNom() + "\n";
+
+        // Construction du "birtday"
+        vCardContent = vCardContent + "BIRTHDAY:" + contact.getDateDeNAissance() + "\n";
+
+        // Construction du "tel;type=persnum"
+        vCardContent = vCardContent + "TEL;TYPE=persnum, voice;VALUE=uri" + contact.getTelPerso() + " "
+                + contact.getCodePostale() + "\n";
+
+        // Construction du "tel;type=pronum"
+        vCardContent = vCardContent + "TEL;TYPE=worknum, voice; VALUE=uri" + contact.getTelPro() + "\n";
+
+        // Construction du "adress"
+        vCardContent = vCardContent + "ADR;TYPE=HOME; PREF=1; LABEL" + contact.getAdresse() + "\n";
+
+        // Construction du "email"
+        vCardContent = vCardContent + "EMAIL:" + contact.getMail() + "\n";
+
+        // Construction "link git"
+        vCardContent = vCardContent + "LINKGIT:" + contact.getLienGit() + "\n";
+
+        // Construction "END VCARD"
+        vCardContent = vCardContent + "END:VCARD";
+        // 2 Ecriture de la vCard dans un fichier
+
+        Path path = Paths.get(filesPath);
+
+        // Try block to check for exceptions
+        try {
+            // Now calling Files.writeString() method
+            // with path , content & standard charsets
+            Files.writeString(path, vCardContent, StandardCharsets.UTF_8);
         }
+
+        // Catch block to handle the exception
+        catch (IOException ex) {
+            // Print messqage exception occurred as
+            // invalid. directory local path is passed
+            System.out.print("Invalid Path");
+        }
+
     }
 
 }
