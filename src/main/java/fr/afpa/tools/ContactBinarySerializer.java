@@ -7,15 +7,39 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import fr.afpa.models.Contact;
 
 public class ContactBinarySerializer implements Serializer<Contact>, Deserializer<Contact> {
 
-    public static void serialize(Contact contactToSerialize, String fileName) {
+
+
+
+    @Override
+    public void saveList(String filesPath, ArrayList<Contact> contactlistViewToSerialize) {
         try {
-            FileOutputStream fos = new FileOutputStream(fileName);
+            FileOutputStream fos = new FileOutputStream(filesPath);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            // sérialisation : écriture de l'objet dans le flux de sortie
+            oos.writeObject(contactlistViewToSerialize);
+            // on vide le tampon
+            oos.flush();
+            System.out.println(contactlistViewToSerialize + " a ete serialise");
+            oos.close();
+            fos.close();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
+
+    throw new UnsupportedOperationException("Unimplemented method 'load'");
+    }
+
+    @Override
+    public void save(String filePath, Contact contactToSerialize) {
+        try {
+            FileOutputStream fos = new FileOutputStream(filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             // sérialisation : écriture de l'objet dans le flux de sortie
             oos.writeObject(contactToSerialize);
@@ -27,13 +51,16 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
+        
     }
 
-    public static void deserialize(Contact contactToDeserialize, String fileName) {
-        try (FileInputStream fileIn = new FileInputStream(fileName);
+    @Override
+    public ArrayList<Contact> loadList(String filePath) {
+        ArrayList<Contact>deserializeList=null;
+        try (FileInputStream fileIn = new FileInputStream(filePath);
                 ObjectInputStream in = new ObjectInputStream(fileIn)) {
-            contactToDeserialize = (Contact) in.readObject();
-            System.out.println("La désérialisation est terminée. Objet : " + contactToDeserialize);
+            deserializeList = (ArrayList<Contact>) in.readObject();
+            System.out.println("La désérialisation est terminée. Objet : " + deserializeList);
         } catch (FileNotFoundException fnf) {
             System.err.println("Le fichier n'a pas été trouvé.");
         } catch (EOFException eof) {
@@ -44,32 +71,33 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
             System.out.println("Classe Personne introuvable.");
             c.printStackTrace();
         }
-
+        return deserializeList;
     }
 
     @Override
-    public String load(String filePath) {
-
-        throw new UnsupportedOperationException("Unimplemented method 'load'");
+    public Contact load(String filePath) {
+        Contact deserializeContact=null;
+        try (FileInputStream fileIn = new FileInputStream(filePath);
+                ObjectInputStream in = new ObjectInputStream(fileIn)) {
+            deserializeContact = (Contact) in.readObject();
+            System.out.println("La désérialisation est terminée. Objet : " + deserializeContact);
+        } catch (FileNotFoundException fnf) {
+            System.err.println("Le fichier n'a pas été trouvé.");
+        } catch (EOFException eof) {
+            System.err.println("Fin de fichier atteinte.");
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Classe Personne introuvable.");
+            c.printStackTrace();
+        }
+        return deserializeContact;
     }
 
-    @Override
-    public ArrayList<Contact> loadList(String filePath) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'loadList'");
-    }
 
-    @Override
-    public void saveList(String filesPath, ArrayList<Contact> objectsToSave) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'saveList'");
-    }
-
-    @Override
-    public void save(String filePath, Contact objet) {
-        Contact contact = new Contact("rud", "Ati", "M", "13/08/1990", "RANA", "Bordeaux", "0694644522", "",
-                "rudati@gmail.com", "41800", "https://github.com/d9shboard");
-        Contact.serialize(contact, "contactu");
-    }
 
 }
+
+// Contact contact = new Contact("rud", "Ati", "M", "13/08/1990", "RANA", "Bordeaux", "0694644522", "",
+// "rudati@gmail.com", "41800", "https://github.com/d9shboard");
+// Contact.serialize(contact, "contactu");

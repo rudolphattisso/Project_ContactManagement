@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.github.cliftonlabs.json_simple.JsonArray;
-import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsoner;
 
 import fr.afpa.models.Contact;
