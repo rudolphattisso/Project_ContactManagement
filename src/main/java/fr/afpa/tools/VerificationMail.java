@@ -38,32 +38,32 @@ public class VerificationMail {
 
     // Cette partie du code teste plusieurs adresses email pour voir
     // si elles sont valides.
-    public static void main(String[] args) {
-        String[] testEmails = {
-                "simple@example.com",
-                "very.common@example.com",
-                "disposable.style.email.with+symbol@example.com",
-                "other.email-with-dash@example.com",
-                "fully-qualified-domain@example.com",
-                "user.name+tag+sorting@example.com",
-                "x@example.com",
-                "example-indeed@strange-example.com",
-                "admin@mailserver1",
-                "user@localserver",
-                "user@[IPv6:2001:db8::1]",
-                "Abc.example.com",
-                "A@b@c@example.com",
-                "a\"b(c)d,e:f;g<h>i[j\\k]l@example.com",
-                "just\"not\"right@example.com",
-                "this is\"not\\allowed@example.com",
-                "this\\ still\\\"not\\\\allowed@example.com",
-                "1234567890123456789012345678901234567890123456789012345678901234x@example.com",
-                "john..doe@example.com",
-                "john.doe@example..com"
-        };
+    // public static void main(String[] args) {
+    //     String[] testEmails = {
+    //             "simple@example.com",
+    //             "very.common@example.com",
+    //             "disposable.style.email.with+symbol@example.com",
+    //             "other.email-with-dash@example.com",
+    //             "fully-qualified-domain@example.com",
+    //             "user.name+tag+sorting@example.com",
+    //             "x@example.com",
+    //             "example-indeed@strange-example.com",
+    //             "admin@mailserver1",
+    //             "user@localserver",
+    //             "user@[IPv6:2001:db8::1]",
+    //             "Abc.example.com",
+    //             "A@b@c@example.com",
+    //             "a\"b(c)d,e:f;g<h>i[j\\k]l@example.com",
+    //             "just\"not\"right@example.com",
+    //             "this is\"not\\allowed@example.com",
+    //             "this\\ still\\\"not\\\\allowed@example.com",
+    //             "1234567890123456789012345678901234567890123456789012345678901234x@example.com",
+    //             "john..doe@example.com",
+    //             "john.doe@example..com"
+    //     };
 
-        for (String email : testEmails) {
-            System.out.println("Is " + email + " a valid email address? " + isValidEmail(email));
-        }
-    }
+    //     for (String email : testEmails) {
+    //         System.out.println("Is " + email + " a valid email address? " + isValidEmail(email));
+    //     }
+    // }
 }

@@ -14,13 +14,11 @@ import fr.afpa.models.Contact;
 
 public class ContactBinarySerializer implements Serializer<Contact>, Deserializer<Contact> {
 
-
-
-
     @Override
-    public void saveList(String filesPath, ArrayList<Contact> contactlistViewToSerialize) {
+    public void saveList(String filePath, ArrayList<Contact> contactlistViewToSerialize) {
         try {
-            FileOutputStream fos = new FileOutputStream(filesPath);
+
+            FileOutputStream fos = new FileOutputStream(filePath);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             // sérialisation : écriture de l'objet dans le flux de sortie
             oos.writeObject(contactlistViewToSerialize);
@@ -33,7 +31,6 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
             ioe.printStackTrace();
         }
 
-    throw new UnsupportedOperationException("Unimplemented method 'load'");
     }
 
     @Override
@@ -51,12 +48,12 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-        
+
     }
 
     @Override
     public ArrayList<Contact> loadList(String filePath) {
-        ArrayList<Contact>deserializeList=null;
+        ArrayList<Contact> deserializeList = null;
         try (FileInputStream fileIn = new FileInputStream(filePath);
                 ObjectInputStream in = new ObjectInputStream(fileIn)) {
             deserializeList = (ArrayList<Contact>) in.readObject();
@@ -76,7 +73,7 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
 
     @Override
     public Contact load(String filePath) {
-        Contact deserializeContact=null;
+        Contact deserializeContact = null;
         try (FileInputStream fileIn = new FileInputStream(filePath);
                 ObjectInputStream in = new ObjectInputStream(fileIn)) {
             deserializeContact = (Contact) in.readObject();
@@ -94,10 +91,9 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
         return deserializeContact;
     }
 
-
-
 }
 
-// Contact contact = new Contact("rud", "Ati", "M", "13/08/1990", "RANA", "Bordeaux", "0694644522", "",
+// Contact contact = new Contact("rud", "Ati", "M", "13/08/1990", "RANA",
+// "Bordeaux", "0694644522", "",
 // "rudati@gmail.com", "41800", "https://github.com/d9shboard");
 // Contact.serialize(contact, "contactu");

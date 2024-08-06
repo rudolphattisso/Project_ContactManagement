@@ -10,6 +10,8 @@ import fr.afpa.App;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.io.Writer;
 
@@ -34,8 +36,8 @@ public class Contact implements Serializable, Jsonable {
     public Contact(String nom, String prenom,
             String genre, String dateDeNaissance,
             String pseudo, String adresse,
-            String telPerso, String telPro, 
-            String mail, String codePostale, 
+            String telPerso, String telPro,
+            String mail, String codePostale,
             String lienGit) {
 
         this.nom = new SimpleStringProperty(nom);
@@ -195,13 +197,11 @@ public class Contact implements Serializable, Jsonable {
     }
 
     public static void serialize(Contact contact, String string) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'serialize'");
     }
 
     @Override
     public String toJson() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'toJson'");
     }
 
@@ -221,6 +221,43 @@ public class Contact implements Serializable, Jsonable {
         jsonObject.put("lienGit", this.getLienGit());
 
         jsonObject.toJson(writable);
+    }
+
+    private void writeObject(ObjectOutputStream oos) throws IOException {
+
+        oos.writeObject(nom.getValue());
+        oos.writeObject(prenom.getValue());
+        oos.writeObject(genre.getValue());
+        oos.writeObject(dateDeNaissance.getValue());
+        oos.writeObject(pseudo.getValue());
+        oos.writeObject(adresse.getValue());
+        oos.writeObject(telPerso.getValue());
+        oos.writeObject(telPro.getValue());
+        oos.writeObject(mail.getValue());
+        oos.writeObject(codePostale.getValue());
+        oos.writeObject(lienGit.getValue());
+
+    }
+
+    private void readObject(ObjectInputStream in) throws IOException {
+
+        try {
+
+            nom = new SimpleStringProperty((String) in.readObject());
+            prenom = new SimpleStringProperty((String) in.readObject());
+            genre = new SimpleStringProperty((String) in.readObject());
+            dateDeNaissance = new SimpleStringProperty((String) in.readObject());
+            pseudo = new SimpleStringProperty((String) in.readObject());
+            adresse = new SimpleStringProperty((String) in.readObject());
+            telPerso = new SimpleStringProperty((String) in.readObject());
+            telPro = new SimpleStringProperty((String) in.readObject());
+            mail = new SimpleStringProperty((String) in.readObject());
+            codePostale = new SimpleStringProperty((String) in.readObject());
+            lienGit = new SimpleStringProperty((String) in.readObject());
+            
+        } catch (ClassNotFoundException e) {
+            logger.debug(e.getMessage());
+        } 
     }
 
 }

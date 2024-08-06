@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.afpa.controllers.ContactManagementController">
+<HBox alignment="CENTER" stylesheets="@../../style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.afpa.controllers.ContactManagementController">
    <children>
       <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
          <children>
@@ -147,7 +147,7 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </Label>
-            <TextField fx:id="mailField">
+            <TextField fx:id="mailField" onAction="#creer">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
@@ -165,12 +165,12 @@
             <Region minHeight="20.0" prefHeight="200.0" prefWidth="200.0" />
             <HBox accessibleRole="CHECK_BOX" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="BoutonCreer" layoutX="5.0" layoutY="6.0" mnemonicParsing="false" text="Créer">
+                  <Button fx:id="BoutonCreer" layoutX="5.0" layoutY="6.0" mnemonicParsing="false" onAction="#creer" text="Créer">
                      <HBox.margin>
                         <Insets right="25.0" top="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button fx:id="boutonModifier" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" text="Modifier">
+                  <Button fx:id="boutonModifier" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#modifier" text="Modifier">
                      <HBox.margin>
                         <Insets left="20.0" top="10.0" />
                      </HBox.margin>
@@ -179,7 +179,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="boutonSupprimer" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Supprimer">
+                  <Button fx:id="boutonSupprimer" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#supprimer" text="Supprimer">
                      <HBox.margin>
                         <Insets right="10.0" top="10.0" />
                      </HBox.margin>
