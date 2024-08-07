@@ -84,7 +84,7 @@ public class ContactvCardSerializer implements Serializer<Contact> {
         vCardContent = vCardContent + "FN:" + contact.getPrenom() + " " + contact.getNom() + "\n";
 
         // Construction du "birtday"
-        vCardContent = vCardContent + "BIRTHDAY:" + contact.getDateDeNaissance() + "\n";
+        vCardContent = vCardContent + "BIRTHDAY:" + contact.getDateDeNAissanceProperty() + "\n";
 
         // Construction du "tel;type=persnum"
         vCardContent = vCardContent + "TEL;TYPE=persnum, voice;VALUE=uri" + contact.getTelPerso() + " "

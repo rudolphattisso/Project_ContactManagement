@@ -7,6 +7,8 @@ import com.github.cliftonlabs.json_simple.JsonObject;
 import com.github.cliftonlabs.json_simple.Jsonable;
 
 import fr.afpa.App;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 import java.io.IOException;
@@ -16,6 +18,7 @@ import fr.afpa.App;
 import javafx.beans.property.SimpleStringProperty;
 import java.io.Serializable;
 import java.io.Writer;
+import java.time.LocalDate;
 
 public class Contact implements Serializable, Jsonable {
 
@@ -26,7 +29,7 @@ public class Contact implements Serializable, Jsonable {
     private SimpleStringProperty nom;
     private SimpleStringProperty prenom;
     private SimpleStringProperty genre;
-    private SimpleStringProperty dateDeNaissance;
+    private ObjectProperty <LocalDate> dateDeNaissance;
     private SimpleStringProperty pseudo;
     private SimpleStringProperty adresse;
     private SimpleStringProperty telPerso;
@@ -36,7 +39,7 @@ public class Contact implements Serializable, Jsonable {
     private SimpleStringProperty lienGit;
 
     public Contact(String nom, String prenom,
-            String genre, String dateDeNaissance,
+            String genre, LocalDate dateDeNaissance,
             String pseudo, String adresse,
             String telPerso, String telPro,
             String mail, String codePostale,
@@ -45,7 +48,7 @@ public class Contact implements Serializable, Jsonable {
         this.nom = new SimpleStringProperty(nom);
         this.prenom = new SimpleStringProperty(prenom);
         this.genre = new SimpleStringProperty(genre);
-        this.dateDeNaissance = new SimpleStringProperty(dateDeNaissance);
+        this.dateDeNaissance = new SimpleObjectProperty(dateDeNaissance);
         this.pseudo = new SimpleStringProperty(pseudo);
         this.adresse = new SimpleStringProperty(adresse);
         this.telPerso = new SimpleStringProperty(telPerso);
@@ -88,12 +91,12 @@ public class Contact implements Serializable, Jsonable {
         return genre;
     }
 
-    public String getDateDeNaissance() {
-        return dateDeNaissance.getValue();
-    }
 
-    public SimpleStringProperty getDateDeNAissanceProperty() {
+    public ObjectProperty getDateDeNAissanceProperty() {
         return dateDeNaissance;
+    }
+    public LocalDate getDateDeNAissance() {
+        return dateDeNaissance.getValue();
     }
 
     public String getPseudo() {
@@ -164,7 +167,7 @@ public class Contact implements Serializable, Jsonable {
         this.genre = genre;
     }
 
-    public void setDateDeNaissance(SimpleStringProperty dateDeNaissance) {
+    public void setDateDeNaissance(SimpleObjectProperty dateDeNaissance) {
         this.dateDeNaissance = dateDeNaissance;
     }
 
@@ -212,7 +215,13 @@ public class Contact implements Serializable, Jsonable {
         jsonObject.put("nom", this.getNom());
         jsonObject.put("prénom", this.getPrenom());
         jsonObject.put("genre", this.getGenre());
-        jsonObject.put("date de naissance", this.getDateDeNaissance());
+
+        // traitement de la date de naissance
+        // on est obligé de la transformer en chaîne de caractère car json-simple
+        // ne sait pas sérialiser les objets de la classe "LocalDate"
+        LocalDate dateNaissance = this.getDateDeNAissance();
+        jsonObject.put("date_de_naissance", dateNaissance.toString());
+        
         jsonObject.put("pseudo", this.getPseudo());
         jsonObject.put("adresse", this.getAdresse());
         jsonObject.put("telPerso", this.getTelPerso());
@@ -246,7 +255,7 @@ public class Contact implements Serializable, Jsonable {
             nom = new SimpleStringProperty((String) in.readObject());
             prenom = new SimpleStringProperty((String) in.readObject());
             genre = new SimpleStringProperty((String) in.readObject());
-            dateDeNaissance = new SimpleStringProperty((String) in.readObject());
+            dateDeNaissance = new SimpleObjectProperty((LocalDate) in.readObject());
             pseudo = new SimpleStringProperty((String) in.readObject());
             adresse = new SimpleStringProperty((String) in.readObject());
             telPerso = new SimpleStringProperty((String) in.readObject());

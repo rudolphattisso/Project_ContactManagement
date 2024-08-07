@@ -1,5 +1,6 @@
 package fr.afpa.controllers;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import org.apache.logging.log4j.LogManager;
@@ -14,13 +15,13 @@ import fr.afpa.tools.VerificationUrl;
 import fr.afpa.tools.ContactvCardSerializer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -65,7 +66,7 @@ public class ContactManagementController {
     @FXML
     private ComboBox<String> genreComboBox;
     @FXML
-    private TextField dateDeNaissanceField;
+    private DatePicker datePicker;
     @FXML
     private TextField pseudoField;
     @FXML
@@ -103,7 +104,7 @@ public class ContactManagementController {
             serializer.save("contact-" + selectedContact.getNom() + "-" + selectedContact.getPrenom() + ".json",
                     selectedContact);
         } else {
-            serializer.saveList("contacts.json", new ArrayList<Contact>(selectedContacts));
+            serializer.saveList("contacts.json", new ArrayList<Contact>(contactsObservableList));
         }
 
     }
@@ -131,7 +132,7 @@ public class ContactManagementController {
 
     }
 
-    private ObservableList<Contact> contactsListView = FXCollections.observableArrayList(); // Observable liste pour
+    private ObservableList<Contact> contactsObservableList = FXCollections.observableArrayList(); // Observable liste pour
                                                                                             // stocker les contacts
 
     /**
@@ -150,7 +151,7 @@ public class ContactManagementController {
        //la condition implique que rien ne doit être fait si le tableau est vide et effectuer l'action si dessous si c'estle contraire.
 
         if(deserializedContacts!=null){
-            contactsListView.addAll(deserializedContacts);
+            contactsObservableList.addAll(deserializedContacts);
         }
         
 
@@ -158,14 +159,24 @@ public class ContactManagementController {
 
         // création du lien entre l'élement graphique TableView et le
         // tableau(ObservableList).
-        tableViewContact.setItems(contactsListView);
+        tableViewContact.setItems(contactsObservableList);
 
-        // aujout
-        colGenre.setCellValueFactory(cellData -> cellData.getValue().getGenreProperty());
+        // La confiiguration d'affichage de chaque cellules
         colNom.setCellValueFactory(cellData -> cellData.getValue().getNomProperty());
         colPrenom.setCellValueFactory(cellData -> cellData.getValue().getPrenomProperty());
         colMail.setCellValueFactory(cellData -> cellData.getValue().getMailProperty());
         colTel.setCellValueFactory(cellData -> cellData.getValue().getTelPersoProperty());
+
+        prenomField.setText("izhdfz");
+        nomField.setText("izhdfz");
+        adresseField.setText("izhdfz");
+        pseudoField.setText("izhdfz");
+        numPersoField.setText("izhdfz");
+        numProField.setText("izhdfz");
+        mailField.setText("r@50.com");
+        datePicker.setValue(LocalDate.of(1995, 6, 5));
+        lienGitField.setText("https://gemzo.com");
+
     }
 
     /**
@@ -185,7 +196,9 @@ public class ContactManagementController {
         // mail et url avant vérification.
         String mailValide = null;
         String urlValide = null;
-        String genreSelection = null;
+        String genreSelection = genreComboBox.getSelectionModel().getSelectedItem();
+        LocalDate dateSelection = datePicker.getValue();
+
 
         // processus de verification des champs qui utiliseront les classes qui
         // contiennent*
@@ -194,21 +207,23 @@ public class ContactManagementController {
         Boolean checkUrl = VerificationUrl.isValidURL(lienGitField.getText());
         
         // cas ou les contenus des champs sont valides.
-        if (checkMail == true && checkUrl == true && genreSelection != "Choix du genre") {
+        if (checkMail == true && checkUrl == true && genreSelection != null) {
             mailValide = mailField.getText();
             urlValide = lienGitField.getText();
             genreSelection = genreComboBox.getSelectionModel().getSelectedItem();
+            dateSelection = datePicker.getValue();
+
 
             // création du contact;
             Contact contact = new Contact(nomField.getText(), prenomField.getText(), genreSelection,
-                    dateDeNaissanceField.getText(), pseudoField.getText(), adresseField.getText(),
+                    dateSelection, pseudoField.getText(), adresseField.getText(),
                     numPersoField.getText(),
                     numProField.getText(), mailValide, adresseField.getText(), urlValide);
-            contactsListView.add(contact);
+            contactsObservableList.add(contact);
 
             // serialisation binaire des contacts:
             ContactBinarySerializer serializer = new ContactBinarySerializer();
-            serializer.saveList("contact.ser", new ArrayList<Contact>(contactsListView));
+            serializer.saveList("contact.ser", new ArrayList<Contact>(contactsObservableList));
             // suppression du style CSS qui s'active en cas d'erreur appliqué au champs lors
             // d'une saisie précédente
             mailField.getStyleClass().remove("error-field");
@@ -217,7 +232,7 @@ public class ContactManagementController {
             nomField.setText("");
             prenomField.setText("");
             genreComboBox.getSelectionModel().clearSelection();
-            dateDeNaissanceField.setText("");
+            dateSelection.now();
             pseudoField.setText("");
             adresseField.setText("");
             numPersoField.setText("");
@@ -227,6 +242,7 @@ public class ContactManagementController {
             // cas du formats d'url et mail faux
             tableViewContact.getSelectionModel().clearSelection();
             tableViewContact.getSelectionModel().selectLast();
+            
         } else {
             if (checkMail == false) {
                 mailField.getStyleClass().add("error-field");
@@ -259,7 +275,8 @@ public class ContactManagementController {
         nomField.setText(selectedContact.getNom());
         prenomField.setText(selectedContact.getPrenom());
         genreComboBox.getSelectionModel().select(selectedContact.getGenre());
-        dateDeNaissanceField.setText(selectedContact.getDateDeNaissance());
+        // dateDeNaissanceField.setText(selectedContact.getDateDeNaissance());
+        datePicker.setValue(selectedContact.getDateDeNAissance());
         pseudoField.setText(selectedContact.getPseudo());
         adresseField.setText(selectedContact.getAdresse());
         numPersoField.setText(selectedContact.getTelPerso());
@@ -293,7 +310,7 @@ public class ContactManagementController {
 
                 // serialisation binaire des contacts:
                 ContactBinarySerializer serializer = new ContactBinarySerializer();
-                serializer.saveList("contact.ser", new ArrayList<Contact>(contactsListView));
+                serializer.saveList("contact.ser", new ArrayList<Contact>(contactsObservableList));
             }
         }
     }
