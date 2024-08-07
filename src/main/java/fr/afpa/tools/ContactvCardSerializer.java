@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import fr.afpa.models.Contact;
 
 // Implementation de l'interface
+// Public class ContactvCardSerializer : Déclare la classe ContactvCardSerializer qui implémente l'interface Serializer<Contact>.
+// Serialize(Contact contact) : Méthode vide, probablement destinée à être implémentée pour la sérialisation d'un seul objet Contact.
 public class ContactvCardSerializer implements Serializer<Contact> {
 
     public void serialize(Contact contact) {
@@ -52,49 +54,23 @@ public class ContactvCardSerializer implements Serializer<Contact> {
         try (FileOutputStream fileOut = new FileOutputStream(filesPath);
                 ObjectOutputStream out = new ObjectOutputStream(fileOut)) {
             out.writeObject(objectsToSave);
-            System.out.println("List of contacts has been saved to " + filesPath);
+            System.out.println(" La liste de contact se sauvegarde sur " + filesPath);
         } catch (IOException i) {
             i.printStackTrace();
         }
     }
 
-    /**
-     * Elle sauvegarde un contact dans un fichier vCard
-     */
-    // @Override
-    // public void save(String filesPath, Contact objet) {
-    // // Creating an instance of file
-    // Path path
-    // = Paths.get(filesPath);
-
-    // // Custom string as an input
-    // String str = "Geeks for Geeks \nWelcome to computer science portal \nHello
-    // Geek";
-
-    // // Try block to check for exceptions
-    // try {
-    // // Now calling Files.writeString() method
-    // // with path , content & standard charsets
-    // Files.writeString(path, str, StandardCharsets.UTF_8);
-    // }
-
-    // // Catch block to handle the exception
-    // catch (IOException ex) {
-    // // Print messqage exception occurred as
-    // // invalid. directory local path is passed
-    // System.out.print("Invalid Path");
-    // }
-    // }
-
-    // Paramètres : filesPath (chemin du fichier) et object (objet Contact à
-    // sauvegarder).
-    // FileOutputStream : Crée un flux de sortie pour écrire des octets dans un
-    // fichier spécifié par filesPath.
-    // ObjectOutputStream : Enveloppe le FileOutputStream et permet la sérialisation
-    // de l'objet.
-    // out.writeObject(object) : Sérialise l'objet et l'écrit dans le fichier.
-    // Gestion des exceptions : try-with-resources pour fermer automatiquement les
-    // flux et catch pour capturer et imprimer les erreurs d'entrée/sortie.
+    // Save : Sauvegarde un objet Contact sous forme de vCard dans un fichier.
+    // FilesPath : Chemin du fichier où le contact doit être sauvegardé.
+    // Contact : Objet Contact à sauvegarder.
+    // vCardContent : Construit la chaîne de caractères représentant le contenu de
+    // la vCard en suivant le format vCard 4.0.
+    // Path path = Paths.get(filesPath) : Crée un objet Path pour le chemin de
+    // fichier spécifié.
+    // Utilise Files.writeString pour écrire le contenu de la vCard dans le fichier
+    // en utilisant l'encodage UTF-8.
+    // Gestion des exceptions : Capture et imprime un message si le chemin est
+    // invalide.
     @Override
     public void save(String filesPath, Contact contact) {
         /// 1 construire la chaîne de caractères correspondant au contenu vCard
@@ -132,23 +108,24 @@ public class ContactvCardSerializer implements Serializer<Contact> {
 
         Path path = Paths.get(filesPath);
 
-        // Try block to check for exceptions
+        // Essayez le bloc pour vérifier les exceptions
         try {
-            // Now calling Files.writeString() method
-            // with path , content & standard charsets
+            // Appel de la méthode Files.writeString()
+            // avec chemin, contenu et jeux de caractères standard
             Files.writeString(path, vCardContent, StandardCharsets.UTF_8);
         }
 
-        // Catch block to handle the exception
+        // Bloc Catch pour gérer l'exception
         catch (IOException ex) {
-            // Print messqage exception occurred as
-            // invalid. directory local path is passed
+            // Une exception d'impression de message s'est produite comme
+            // non valide. Le chemin local du répertoire est transmis
             System.out.print("Invalid Path");
         }
 
     }
 
 }
+
 // -----------------------------------------------------------------------------------
 
 // import ezvcard.VCard;

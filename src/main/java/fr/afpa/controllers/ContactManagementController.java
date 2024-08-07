@@ -1,8 +1,5 @@
 package fr.afpa.controllers;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,13 +14,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 public class ContactManagementController {
 
     private static Logger logger = LogManager.getLogger(App.class);
-    // tableView
+
     @FXML
     private TableView<Contact> tableViewContact;
     @FXML
@@ -70,40 +65,25 @@ public class ContactManagementController {
     @FXML
     private TextField lienGitField;
 
-    // actions
     @FXML
     public void jsonExport(ActionEvent event) {
-        // Instancier ContactJsonSerializer
+
     }
 
     @FXML
     public void vCardExport(ActionEvent event) {
         ContactvCardSerializer vCardSerializer = new ContactvCardSerializer();
 
-        // Sélectionner le contact à exporter
         Contact selectedContact = tableViewContact.getSelectionModel().getSelectedItem();
         if (selectedContact == null) {
             System.out.println("Aucun contact sélectionné");
             return;
-        }else {
-            vCardSerializer.save(selectedContact.getGenre() + selectedContact.getNom() + selectedContact.getPrenom() + ".vcf", selectedContact);
+        } else {
+            vCardSerializer.save(
+                    selectedContact.getGenre() + selectedContact.getNom() + selectedContact.getPrenom() + ".vcf",
+                    selectedContact);
         }
 
-        // // Utilisez un FileChooser pour choisir l'emplacement de sauvegarde
-        // FileChooser fileChooser = new FileChooser();
-        // fileChooser.setTitle("Sauvegarde Contact en fichier vCard");
-        // fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("vCard
-        // Files", "*.vcf"));
-        // File file = fileChooser.showSaveDialog(new Stage());
-
-        // if (file != null) {
-        // try {
-        // vCardSerializer.save(file.getAbsolutePath(), selectedContact);
-        // System.out.println("Contact exported as vCard");
-        // } catch (Exception e) {
-        // logger.error("Erreur lors de l'exportation du contact en vCard", e);
-        // }
-        // }
     }
 
     @FXML

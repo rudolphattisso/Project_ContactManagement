@@ -2,16 +2,13 @@ package fr.afpa.models;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import fr.afpa.App;
 import javafx.beans.property.SimpleStringProperty;
-
 import java.io.Serializable;
 
 public class Contact implements Serializable {
 
     private static Logger logger = LogManager.getLogger(App.class);
-    //SimpleStringProperty est utilisé pour mettre automiquement l'interface graphique à jour(TableView) à chaque modification de la String
     private SimpleStringProperty nom;
     private SimpleStringProperty prenom;
     private SimpleStringProperty genre;
@@ -24,20 +21,19 @@ public class Contact implements Serializable {
     private SimpleStringProperty codePostale;
     private SimpleStringProperty lienGit;
 
-    
     public Contact(String nom, String prenom, String genre, String dateDeNAissance, String pseudo, String adresse,
             String telPerso, String telPro, String mail, String codePostale, String lienGit) {
         this.nom = new SimpleStringProperty(nom);
         this.prenom = new SimpleStringProperty(prenom);
-        this.genre = new SimpleStringProperty (genre);
-        this.dateDeNAissance = new SimpleStringProperty(dateDeNAissance) ;
-        this.pseudo = new SimpleStringProperty (pseudo);
-        this.adresse = new SimpleStringProperty (adresse) ;
-        this.telPerso = new SimpleStringProperty (telPerso) ;
-        this.telPro = new SimpleStringProperty (telPro) ;
-        this.mail = new SimpleStringProperty (mail) ;
-        this.codePostale = new SimpleStringProperty (codePostale) ;
-        this.lienGit = new SimpleStringProperty (lienGit) ;
+        this.genre = new SimpleStringProperty(genre);
+        this.dateDeNAissance = new SimpleStringProperty(dateDeNAissance);
+        this.pseudo = new SimpleStringProperty(pseudo);
+        this.adresse = new SimpleStringProperty(adresse);
+        this.telPerso = new SimpleStringProperty(telPerso);
+        this.telPro = new SimpleStringProperty(telPro);
+        this.mail = new SimpleStringProperty(mail);
+        this.codePostale = new SimpleStringProperty(codePostale);
+        this.lienGit = new SimpleStringProperty(lienGit);
     }
 
     @Override
@@ -48,17 +44,18 @@ public class Contact implements Serializable {
                 + "]";
     }
 
-    // getters
     public String getNom() {
-        return nom.getValue();// pour obtenir un String; car l'attribut à été déclaré en SimpleString Property.
+        return nom.getValue();
     }
+
     public SimpleStringProperty getNomProperty() {
-        return nom;// pour obtenir  SimpleString Property.
+        return nom;
     }
 
     public String getPrenom() {
         return prenom.getValue();
     }
+
     public SimpleStringProperty getPrenomProperty() {
         return prenom;
     }
@@ -66,6 +63,7 @@ public class Contact implements Serializable {
     public String getGenre() {
         return genre.getValue();
     }
+
     public SimpleStringProperty getGenreProperty() {
         return genre;
     }
@@ -73,15 +71,15 @@ public class Contact implements Serializable {
     public String getDateDeNAissance() {
         return dateDeNAissance.getValue();
     }
-    
+
     public SimpleStringProperty getDateDeNAissanceProperty() {
         return dateDeNAissance;
     }
-    
 
     public String getPseudo() {
         return pseudo.getValue();
     }
+
     public SimpleStringProperty getPseudoProperty() {
         return pseudo;
     }
@@ -89,6 +87,7 @@ public class Contact implements Serializable {
     public String getAdresse() {
         return adresse.getValue();
     }
+
     public SimpleStringProperty getAdresseProperty() {
         return adresse;
     }
@@ -96,6 +95,7 @@ public class Contact implements Serializable {
     public String getTelPerso() {
         return telPerso.getValue();
     }
+
     public SimpleStringProperty getTelPersoProperty() {
         return telPerso;
     }
@@ -103,6 +103,7 @@ public class Contact implements Serializable {
     public String getTelPro() {
         return telPro.getValue();
     }
+
     public SimpleStringProperty getTelProProperty() {
         return telPro;
     }
@@ -112,12 +113,13 @@ public class Contact implements Serializable {
     }
 
     public SimpleStringProperty getMailProperty() {
-    return mail;
-}
+        return mail;
+    }
 
     public String getCodePostale() {
         return codePostale.getValue();
     }
+
     public SimpleStringProperty getCodePostaleProperty() {
         return codePostale;
     }
@@ -125,13 +127,13 @@ public class Contact implements Serializable {
     public String getLienGit() {
         return lienGit.getValue();
     }
+
     public SimpleStringProperty getLienGitProperty() {
         return lienGit;
     }
 
-    // Setters
     public void setNom(String nom) {
-        this.nom.setValue(nom); // changer la valeur du string property
+        this.nom.setValue(nom);
     }
 
     public void setPrenom(SimpleStringProperty prenom) {
@@ -173,6 +175,7 @@ public class Contact implements Serializable {
     public void setLienGit(SimpleStringProperty lienGit) {
         this.lienGit = lienGit;
     }
+
     public String toVCard() {
         StringBuilder vcard = new StringBuilder();
         vcard.append("BEGIN:VCARD\n");
