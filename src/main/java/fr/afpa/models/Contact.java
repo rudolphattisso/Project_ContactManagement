@@ -12,6 +12,8 @@ import javafx.beans.property.SimpleStringProperty;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import fr.afpa.App;
+import javafx.beans.property.SimpleStringProperty;
 import java.io.Serializable;
 import java.io.Writer;
 
@@ -61,7 +63,6 @@ public class Contact implements Serializable, Jsonable {
                 + "]";
     }
 
-    // getters
     public String getNom() {
         return nom.getValue();// pour obtenir un String; car l'attribut à été déclaré en SimpleString
                               // Property.
@@ -151,7 +152,6 @@ public class Contact implements Serializable, Jsonable {
         return lienGit;
     }
 
-    // Setters
     public void setNom(String nom) {
         this.nom.setValue(nom); // changer la valeur du string property
     }
@@ -260,4 +260,19 @@ public class Contact implements Serializable, Jsonable {
         } 
     }
 
+    public String toVCard() {
+        StringBuilder vcard = new StringBuilder();
+        vcard.append("BEGIN:VCARD\n");
+        vcard.append("VERSION:4.0\n");
+        vcard.append("N:").append(nom.getValue()).append(";").append(prenom.getValue()).append("\n");
+        vcard.append("FN:").append(prenom.getValue()).append(" ").append(nom.getValue()).append("\n");
+        vcard.append("EMAIL:").append(mail.getValue()).append("\n");
+        vcard.append("TEL;TYPE=CELL:").append(telPerso.getValue()).append("\n");
+        vcard.append("TEL;TYPE=WORK:").append(telPro.getValue()).append("\n");
+        vcard.append("ADR:").append(adresse.getValue()).append(";").append(codePostale.getValue()).append("\n");
+        vcard.append("BDAY:").append(dateDeNaissance.getValue()).append("\n");
+        vcard.append("URL:").append(lienGit.getValue()).append("\n");
+        vcard.append("END:VCARD");
+        return vcard.toString();
+    }
 }
