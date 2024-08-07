@@ -18,10 +18,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ComboBox;
 
 public class ContactManagementController {
 
@@ -59,7 +61,7 @@ public class ContactManagementController {
     @FXML
     private TextField prenomField;
     @FXML
-    private TextField genreField;
+    private ComboBox<String> genreComboBox;
     @FXML
     private TextField dateDeNaissanceField;
     @FXML
@@ -74,6 +76,8 @@ public class ContactManagementController {
     private TextField mailField;
     @FXML
     private TextField lienGitField;
+
+    // ObservableList<String> comboBoxList = FXCollections.observableArrayList();
 
     /**
      * Méthode qui se déclenche sur un clic sur le bouton "Export JSon"
@@ -130,6 +134,9 @@ public class ContactManagementController {
     @FXML
     public void initialize() {
 
+        // Chargement des différents possibles dans la comboBox
+        genreComboBox.getItems().addAll("Homme", "Femme", "Non binaire");
+
         ContactBinarySerializer binaryDeserializer = new ContactBinarySerializer();
 
         ArrayList<Contact> deserializedContacts = binaryDeserializer.loadList("contact.ser");
@@ -168,18 +175,22 @@ public class ContactManagementController {
         // mail et url avant vérification.
         String mailValide = null;
         String urlValide = null;
+        String genreSelection = null;
 
         // processus de verification des champs qui utiliseront les classes qui
         // contiennent*
         // les méthodes de vérificatoin
         Boolean checkMail = VerificationMail.isValidEmail(mailField.getText());
         Boolean checkUrl = VerificationUrl.isValidURL(lienGitField.getText());
+        
         // cas ou les contenus des champs sont valides.
-        if (checkMail == true && checkUrl == true) {
+        if (checkMail == true && checkUrl == true && genreSelection != "Choix du genre") {
             mailValide = mailField.getText();
             urlValide = lienGitField.getText();
+            genreSelection = genreComboBox.getSelectionModel().getSelectedItem();
+
             // création du contact;
-            Contact contact = new Contact(nomField.getText(), prenomField.getText(), genreField.getText(),
+            Contact contact = new Contact(nomField.getText(), prenomField.getText(), genreSelection,
                     dateDeNaissanceField.getText(), pseudoField.getText(), adresseField.getText(),
                     numPersoField.getText(),
                     numProField.getText(), mailValide, adresseField.getText(), urlValide);
@@ -195,7 +206,7 @@ public class ContactManagementController {
             // retirer supprimer les infos des champs après ajout du contact
             nomField.setText("");
             prenomField.setText("");
-            genreField.setText("");
+            genreComboBox.setPromptText("Choix du genre");
             dateDeNaissanceField.setText("");
             pseudoField.setText("");
             adresseField.setText("");
@@ -210,6 +221,9 @@ public class ContactManagementController {
             }
             if (checkUrl == false) {
                 lienGitField.getStyleClass().add("error-field");
+            }
+            if (genreSelection != "Choix du genre") {
+                genreComboBox.getStyleClass().add("error-field");
             }
         }
 
@@ -232,7 +246,7 @@ public class ContactManagementController {
         // envoi des valeur du contacts dans les champs:
         nomField.setText(selectedContact.getNom());
         prenomField.setText(selectedContact.getPrenom());
-        genreField.setText(selectedContact.getGenre());
+        genreComboBox.getPromptText();
         dateDeNaissanceField.setText(selectedContact.getDateDeNaissance());
         pseudoField.setText(selectedContact.getPseudo());
         adresseField.setText(selectedContact.getAdresse());

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,6 +21,13 @@ public class App extends Application {
         scene = new Scene(loadFXML("contactManagement"), 1024, 768);
         stage.setScene(scene);
         stage.show();
+
+        //  TITLE IN STAGE 
+        stage.setTitle("Gestion de la liste des contacts");
+
+    //     // ICON
+    //     Image icon = new Image(getClass().getResourceAsStream("annuaire.png"));
+    //     stage.getIcons().add(icon); // Add icon in stage
     }
 
     static void setRoot(String fxml) throws IOException {
