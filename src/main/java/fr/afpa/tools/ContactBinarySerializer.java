@@ -7,12 +7,17 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import fr.afpa.models.Contact;
 
 public class ContactBinarySerializer implements Serializer<Contact>, Deserializer<Contact> {
+
+
+    /**
+     * Méthode implémentée de l'interface Serializer contenue dans package fr.afpa.tools 
+     *  qui permet de sauvegarder une liste de contacts
+     */
 
     @Override
     public void saveList(String filePath, ArrayList<Contact> contactlistViewToSerialize) {
@@ -33,6 +38,10 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
 
     }
 
+    /**
+     * Méthode implémentée de l'interface Serializer contenue dans package fr.afpa.tools 
+     * qui permet de sauvegarder un contact
+     */
     @Override
     public void save(String filePath, Contact contactToSerialize) {
         try {
@@ -51,6 +60,10 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
 
     }
 
+    /**
+     * methode réimplémentée de l'interface Deserializer contenue dans package fr.afpa.tools qui permet de 
+     * de charger un liste de contact depuis un fichier binaire;
+     */
     @Override
     public ArrayList<Contact> loadList(String filePath) {
         ArrayList<Contact> deserializeList = null;
@@ -70,7 +83,10 @@ public class ContactBinarySerializer implements Serializer<Contact>, Deserialize
         }
         return deserializeList;
     }
-
+    /**
+     * methode réimplémentée de l'interface Deserializer contenue dans package fr.afpa.tools qui permet de 
+     * de charger un  contact depuis un fichier binaire;
+     */
     @Override
     public Contact load(String filePath) {
         Contact deserializeContact = null;

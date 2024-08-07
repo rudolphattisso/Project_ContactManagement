@@ -9,7 +9,7 @@ public class VerificationUrl {
 
         
 
-        // String regex = "https?://(?:www\\.)?[a-zA-Z0-9./]+";
+        //utilisation du site OWASP qui donne de bonne pratiques de sécurisation de méthodes.
         String regex = "^((((https?|ftps?|gopher|telnet|nntp)://)|(mailto:|news:))(%[0-9A-Fa-f]{2}|[-()_.!~*';/?:@&=+$,A-Za-z0-9])+)([).!';/?:,][[:blank:|:blank:]])?$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(url);

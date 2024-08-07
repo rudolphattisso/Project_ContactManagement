@@ -12,7 +12,10 @@ import fr.afpa.models.Contact;
 
 public class ContactJsonSerializer implements Serializer<Contact> {
 
-    // Sauvegarder une liste contacts dans un fichier JSON
+    /**
+     * Méthode implémentée de l'interface Serializer contenue dans package fr.afpa.tools .
+     *  Elle permet d'exporter la liste de contact en format Json
+     */
     @Override
     public void saveList(String filesPath, ArrayList<Contact> contactsToSave) {
         // JSON String
@@ -29,8 +32,11 @@ public class ContactJsonSerializer implements Serializer<Contact> {
     }
 
     /**
-     * Sauvegarder un seul contact dans un fichier JSON
+     *    /**
+     * Méthode implémentée de l'interface Serializer contenue dans package fr.afpa.tools .
+     *  elle permet d'exporter un seul contact dans un fichier JSON
      */
+     
     @Override
     public void save(String filePath, Contact contact) {
 

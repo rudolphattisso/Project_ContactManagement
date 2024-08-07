@@ -3,6 +3,8 @@ package fr.afpa.tools;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+
 public class VerificationMail {
     // Définir le modèle regex pour une adresse email.
     // Modèle regex pour une adresse email valides.
