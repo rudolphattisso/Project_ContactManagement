@@ -26,8 +26,8 @@ public class App extends Application {
         stage.setTitle("Gestion de la liste des contacts");
 
     //     // ICON
-    //     Image icon = new Image(getClass().getResourceAsStream("annuaire.png"));
-    //     stage.getIcons().add(icon); // Add icon in stage
+        Image icon = new Image(getClass().getResourceAsStream("contacts.png"));
+        stage.getIcons().add(icon); // Add icon in stage
     }
 
     static void setRoot(String fxml) throws IOException {

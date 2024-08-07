@@ -13,6 +13,7 @@ import fr.afpa.tools.VerificationMail;
 import fr.afpa.tools.VerificationUrl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -23,7 +24,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ComboBox;
+
 
 public class ContactManagementController {
 
@@ -89,6 +90,7 @@ public class ContactManagementController {
     public void jsonExport(ActionEvent event) {
 
         // Intanciation d'un serializer
+       
         ContactJsonSerializer serializer = new ContactJsonSerializer();
 
         // récupération du ou des contacts sélectionné
@@ -138,10 +140,15 @@ public class ContactManagementController {
         genreComboBox.getItems().addAll("Homme", "Femme", "Non binaire");
 
         ContactBinarySerializer binaryDeserializer = new ContactBinarySerializer();
-
+        
         ArrayList<Contact> deserializedContacts = binaryDeserializer.loadList("contact.ser");
+       // condition dans le cas ou la désirialisaton est impossible car le fichier de binaire n'existe pas au premier demarrage de l'application
+       //la condition implique que rien ne doit être fait si le tableau est vide et effectuer l'action si dessous si c'estle contraire.
 
-        contactsListView.addAll(deserializedContacts);
+        if(deserializedContacts!=null){
+            contactsListView.addAll(deserializedContacts);
+        }
+        
 
         tableViewContact.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
@@ -155,7 +162,6 @@ public class ContactManagementController {
         colPrenom.setCellValueFactory(cellData -> cellData.getValue().getPrenomProperty());
         colMail.setCellValueFactory(cellData -> cellData.getValue().getMailProperty());
         colTel.setCellValueFactory(cellData -> cellData.getValue().getTelPersoProperty());
-
     }
 
     /**
@@ -215,6 +221,8 @@ public class ContactManagementController {
             mailField.setText("");
             lienGitField.setText("");
             // cas du formats d'url et mail faux
+            tableViewContact.getSelectionModel().clearSelection();
+            tableViewContact.getSelectionModel().selectLast();
         } else {
             if (checkMail == false) {
                 mailField.getStyleClass().add("error-field");
@@ -246,7 +254,7 @@ public class ContactManagementController {
         // envoi des valeur du contacts dans les champs:
         nomField.setText(selectedContact.getNom());
         prenomField.setText(selectedContact.getPrenom());
-        genreComboBox.getPromptText();
+        genreComboBox.getSelectionModel().select(selectedContact.getGenre());
         dateDeNaissanceField.setText(selectedContact.getDateDeNaissance());
         pseudoField.setText(selectedContact.getPseudo());
         adresseField.setText(selectedContact.getAdresse());

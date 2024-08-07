@@ -23,9 +23,9 @@
             </Label>
             <TableView fx:id="tableViewContact" prefHeight="433.0" prefWidth="423.0" VBox.vgrow="ALWAYS">
                <columns>
-                  <TableColumn fx:id="colNom" prefWidth="75.0" text="Noms" />
-                  <TableColumn fx:id="colPrenom" prefWidth="75.0" text="Prénoms" />
                   <TableColumn fx:id="colGenre" prefWidth="75.0" text="Genre" />
+                  <TableColumn fx:id="colPrenom" prefWidth="75.0" text="Prénoms" />
+                  <TableColumn fx:id="colNom" prefWidth="75.0" text="Noms" />
                   <TableColumn fx:id="colMail" prefWidth="75.0" text="Mail" />
                   <TableColumn fx:id="colTel" prefWidth="75.0" text="Tel" />
                </columns>
