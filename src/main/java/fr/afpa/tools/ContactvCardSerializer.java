@@ -88,7 +88,7 @@ public class ContactvCardSerializer implements Serializer<Contact> {
         vCardContent = vCardContent + "ADR;type=HOME;type=pref:" + contact.getAdresse() + " " + contact.getCodePostale() + "\n";
         
         // Construction du "Mail"
-        vCardContent = vCardContent + "item1.EMAIL;type=INTERNET;type=pref:" + contact.getMail() + "\n";
+        vCardContent = vCardContent + "item1.EMAIL.URL;type=INTERNET;type=pref:" + contact.getMail() + "\n";
        
         // Construction du "TelPerso"
         vCardContent = vCardContent + "TEL;TYPE=persnum, voice;TelPerso=uri:" + contact.getTelPerso() + " " + "\n";
