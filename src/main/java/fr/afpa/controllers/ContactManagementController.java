@@ -11,6 +11,7 @@ import fr.afpa.tools.ContactBinarySerializer;
 import fr.afpa.tools.ContactJsonSerializer;
 import fr.afpa.tools.VerificationMail;
 import fr.afpa.tools.VerificationUrl;
+import fr.afpa.tools.ContactvCardSerializer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -114,15 +115,18 @@ public class ContactManagementController {
 
     @FXML
     public void vCardExport(ActionEvent event) {
+        ContactvCardSerializer vCardSerializer = new ContactvCardSerializer();
 
-        // récupération du contact sélectionné
         Contact selectedContact = tableViewContact.getSelectionModel().getSelectedItem();
+        if (selectedContact == null) {
+            System.out.println("Aucun contact sélectionné");
+            return;
+        } else {
+            vCardSerializer.save(
+                    selectedContact.getGenre() + selectedContact.getNom() + selectedContact.getPrenom() + ".vcf",
+                    selectedContact);
+        }
 
-        // Intanciation d'un serializer
-        ContactJsonSerializer serializer = new ContactJsonSerializer();
-        // appel à la méthode de sauvegarde (sérialisation)
-        serializer.save("contact-" + selectedContact.getNom() + "-" + selectedContact.getPrenom() + ".json",
-                selectedContact);
     }
 
     private ObservableList<Contact> contactsListView = FXCollections.observableArrayList(); // Observable liste pour
