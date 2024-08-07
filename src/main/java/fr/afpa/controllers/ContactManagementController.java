@@ -216,7 +216,7 @@ public class ContactManagementController {
             // retirer supprimer les infos des champs après ajout du contact
             nomField.setText("");
             prenomField.setText("");
-            genreComboBox.setPromptText("Choix du genre");
+            genreComboBox.getSelectionModel().clearSelection();
             dateDeNaissanceField.setText("");
             pseudoField.setText("");
             adresseField.setText("");
