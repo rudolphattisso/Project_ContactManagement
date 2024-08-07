@@ -68,7 +68,7 @@ public class Contact implements Serializable {
         return genre;
     }
 
-    public String getDateDeNAissance() {
+    public String getDateDeNaissance() {
         return dateDeNAissance.getValue();
     }
 
