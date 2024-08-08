@@ -60,7 +60,7 @@ public class Contact implements Serializable, Jsonable {
 
     @Override
     public String toString() {
-        return "Contact [nom=" + nom + ", prenom=" + prenom + ", genre=" + genre + ", dateDeNAissance="
+        return "Contact [nom=" + nom + ", prenom=" + prenom + ", genre=" + genre + ", dateDeNaissance="
                 + dateDeNaissance + ", pseudo=" + pseudo + ", adresse=" + adresse + ", telPerso=" + telPerso
                 + ", telPro=" + telPro + ", mail=" + mail + ", codePostale=" + codePostale + ", lienGit=" + lienGit
                 + "]";
@@ -92,10 +92,10 @@ public class Contact implements Serializable, Jsonable {
     }
 
 
-    public ObjectProperty getDateDeNAissanceProperty() {
+    public ObjectProperty getDateDeNaissanceProperty() {
         return dateDeNaissance;
     }
-    public LocalDate getDateDeNAissance() {
+    public LocalDate getDateDeNaissance() {
         return dateDeNaissance.getValue();
     }
 
@@ -219,7 +219,7 @@ public class Contact implements Serializable, Jsonable {
         // traitement de la date de naissance
         // on est obligé de la transformer en chaîne de caractère car json-simple
         // ne sait pas sérialiser les objets de la classe "LocalDate"
-        LocalDate dateNaissance = this.getDateDeNAissance();
+        LocalDate dateNaissance = this.getDateDeNaissance();
         jsonObject.put("date_de_naissance", dateNaissance.toString());
         
         jsonObject.put("pseudo", this.getPseudo());

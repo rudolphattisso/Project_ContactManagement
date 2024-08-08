@@ -274,7 +274,7 @@ public class ContactManagementController {
         prenomField.setText(selectedContact.getPrenom());
         genreComboBox.getSelectionModel().select(selectedContact.getGenre());
         // dateDeNaissanceField.setText(selectedContact.getDateDeNaissance());
-        datePicker.setValue(selectedContact.getDateDeNAissance());
+        datePicker.setValue(selectedContact.getDateDeNaissance());
         pseudoField.setText(selectedContact.getPseudo());
         adresseField.setText(selectedContact.getAdresse());
         numPersoField.setText(selectedContact.getTelPerso());
