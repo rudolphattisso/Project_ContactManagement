@@ -175,6 +175,8 @@ public class ContactManagementController {
         datePicker.setValue(LocalDate.of(1995, 6, 5));
         lienGitField.setText("https://gemzo.com");
 
+
+
     }
 
     /**
@@ -194,8 +196,16 @@ public class ContactManagementController {
         // mail et url avant vérification.
         String mailValide = null;
         String urlValide = null;
+
+        //pour créer les contrainte de synthaxe/format
         String genreSelection = genreComboBox.getSelectionModel().getSelectedItem();
         LocalDate dateSelection = datePicker.getValue();
+        String nomRempli = nomField.getText();
+        String prenomRempli = prenomField.getText();
+        String numRempli = numPersoField.getText();
+        String adresseRempli = adresseField.getText();
+
+
 
 
         // processus de verification des champs qui utiliseront les classes qui
@@ -204,12 +214,12 @@ public class ContactManagementController {
         Boolean checkMail = VerificationMail.isValidEmail(mailField.getText());
         Boolean checkUrl = VerificationUrl.isValidURL(lienGitField.getText());
         
-        // cas ou les contenus des champs sont valides.
-        if (checkMail == true && checkUrl == true && genreSelection != null) {
+        // cas ou les contenus des champs sont valides. TO DO : contraindre l'ajout du contact si le nom et le prenom ne sont pas renseignés
+        if (checkMail == true && checkUrl == true && genreSelection != null && nomRempli!=null && prenomRempli != null && numRempli != null && adresseRempli != null) {
             mailValide = mailField.getText();
             urlValide = lienGitField.getText();
             genreSelection = genreComboBox.getSelectionModel().getSelectedItem();
-            dateSelection = datePicker.getValue();
+            // dateSelection = datePicker.getValue();
 
 
             // création du contact;
@@ -239,7 +249,7 @@ public class ContactManagementController {
             lienGitField.setText("");
             // cas du formats d'url et mail faux
             tableViewContact.getSelectionModel().clearSelection();
-            tableViewContact.getSelectionModel().selectLast();
+            // tableViewContact.getSelectionModel().selectLast();
             
         } else {
             if (checkMail == false) {
@@ -251,6 +261,17 @@ public class ContactManagementController {
             if (genreSelection != "Choix du genre") {
                 genreComboBox.getStyleClass().add("error-field");
             }
+            // if (nomRempli == null) {
+            //     nomField.getStyleClass().add("error-field");
+            // }
+            // if (prenomRempli == null) {
+            //     prenomField.getStyleClass().add("error-field");
+            // }
+            // if (adresseRempli == null) {
+            //     adresseField.getStyleClass().add("error-field");
+            // }
+
+
         }
 
         logger.info("click créer");

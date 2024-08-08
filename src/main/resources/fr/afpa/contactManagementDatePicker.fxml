@@ -116,7 +116,7 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </TextField>
-            <Label text="Adresse">
+            <Label text="Adresse*">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
@@ -126,7 +126,7 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </TextField>
-            <Label text="Numéro personnel">
+            <Label text="Numéro personnel*">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
@@ -146,7 +146,7 @@
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
             </TextField>
-            <Label text="Mail">
+            <Label text="Mail*">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" />
                </VBox.margin>
