@@ -3,8 +3,6 @@ package fr.afpa.tools;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -76,36 +74,35 @@ public class ContactvCardSerializer implements Serializer<Contact> {
         /// 1 construire la chaîne de caractères correspondant au contenu vCard
         String vCardContent = "BEGIN:VCARD\nVERSION:4.0" + "\n";
 
-        // Construction du nom
+        // Construction du Nom
         vCardContent = vCardContent + "N:" + contact.getNom() + ";" + contact.getPrenom() + ";;" + contact.getGenre()
                 + ";" + "\n";
 
-        // Construction du "full name"
+        // Construction du "Full name"
         vCardContent = vCardContent + "FN:" + contact.getPrenom() + " " + contact.getNom() + "\n";
 
-        // Construction du "birtday"
-        vCardContent = vCardContent + "BIRTHDAY:" + contact.getDateDeNAissanceProperty() + "\n";
-
-        // Construction du "tel;type=persnum"
-        vCardContent = vCardContent + "TEL;TYPE=persnum, voice;VALUE=uri" + contact.getTelPerso() + " "
-                + contact.getCodePostale() + "\n";
-
-        // Construction du "tel;type=pronum"
-        vCardContent = vCardContent + "TEL;TYPE=worknum, voice; VALUE=uri" + contact.getTelPro() + "\n";
-
+        // Construction du "Birtday"
+        vCardContent = vCardContent + "BIRTHDAY:" + contact.getDateDeNaissance() + "\n";
+        
         // Construction du "adress"
-        vCardContent = vCardContent + "ADR;TYPE=HOME; PREF=1; LABEL" + contact.getAdresse() + "\n";
-
-        // Construction du "email"
-        vCardContent = vCardContent + "EMAIL:" + contact.getMail() + "\n";
-
+        vCardContent = vCardContent + "ADR;type=HOME;type=pref:" + contact.getAdresse() + " " + contact.getCodePostale() + "\n";
+        
+        // Construction du "Mail"
+        vCardContent = vCardContent + "item1.EMAIL.URL;type=INTERNET;type=pref:" + contact.getMail() + "\n";
+       
+        // Construction du "TelPerso"
+        vCardContent = vCardContent + "TEL;TYPE=persnum, voice;TelPerso=uri:" + contact.getTelPerso() + " " + "\n";
+        
+        // Construction du "Tel Pro"
+        vCardContent = vCardContent + "TEL;TYPE=persnum, voice;TelPro=uri:" + contact.getTelPro() + "\n";
+        
         // Construction "link git"
-        vCardContent = vCardContent + "LINKGIT:" + contact.getLienGit() + "\n";
+        vCardContent = vCardContent + "item4.URL;type=pref:" + contact.getLienGit() + "\n";
 
         // Construction "END VCARD"
         vCardContent = vCardContent + "END:VCARD";
+        
         // 2 Ecriture de la vCard dans un fichier
-
         Path path = Paths.get(filesPath);
 
         // Essayez le bloc pour vérifier les exceptions
