@@ -1,0 +1,11 @@
+BEGIN:VCARD
+VERSION:4.0
+N:izhdfz;izhdfz;;Femme;
+FN:izhdfz izhdfz
+BIRTHDAY:1995-06-05
+ADR;type=HOME;type=pref:izhdfz izhdfz
+item1.EMAIL.URL;type=INTERNET;type=pref:r@50.com
+TEL;TYPE=persnum, voice;TelPerso=uri:izhdfz 
+TEL;TYPE=persnum, voice;TelPro=uri:izhdfz
+item4.URL;type=pref:https://gemzo.com
+END:VCARD

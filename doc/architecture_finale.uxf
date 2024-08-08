@@ -1,0 +1,79 @@
+<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><element><id>UMLNote</id><coordinates><x>552</x><y>72</y><w>224</w><h>56</h></coordinates><panel_attributes>Note..
+bg=orange
+Classes qui permettent d’effectuer 
+la sauvegarde des objets de la classe "Contact" 
+sous les différents formats attendus.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>328</x><y>200</y><w>168</w><h>40</h></coordinates><panel_attributes>&lt;interface&gt;
+java.io.Serializable</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>248</x><y>304</y><w>208</w><h>56</h></coordinates><panel_attributes>Contact
+--
+
+--
++constructeur
++ getters
++setters
++toString
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>576</x><y>440</y><w>376</w><h>56</h></coordinates><panel_attributes>ContactBinarySerializer
+--
+
+--
++ ContactBinarySerializer implements Serializer&lt;Contact&gt;, Deserializer&lt;Contact&gt; </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>608</x><y>336</y><w>272</w><h>56</h></coordinates><panel_attributes>ContactVCardSerializer
+--
+
+--
++ ContactvCardSerializer implements Serializer&lt;Contact&gt; </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>608</x><y>240</y><w>272</w><h>56</h></coordinates><panel_attributes>ContactJsonSerializer
+--
+
+--
++ ContactJsonSerializer implements Serializer&lt;Contact&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1048</x><y>352</y><w>216</w><h>80</h></coordinates><panel_attributes>&lt;interface&gt;
+Deserializer&lt;T&gt;
+--
+
+--
++ abstract T load(String filePath)
++ abstract ArrayList&lt;T&gt; loadList(String filePath)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>984</x><y>208</y><w>312</w><h>80</h></coordinates><panel_attributes>&lt;interface&gt;
+Serialiser&lt;T&gt;
+--
+
+--
++ abstract void save(String filePath, T objet)
++ abstract void saveList(String filesPath, ArrayList&lt;T&gt; objectsToSave)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>520</x><y>552</y><w>192</w><h>48</h></coordinates><panel_attributes>Note..
+bg=orange
+"ContactBinarySerializer" est le seul qui 
+implémente "Deserializer&lt;T&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>600</x><y>120</y><w>88</w><h>136</h></coordinates><panel_attributes>lt=.
+</panel_attributes><additional_attributes>10;10;90;150</additional_attributes></element><element><id>Relation</id><coordinates><x>448</x><y>352</y><w>144</w><h>160</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>10;10;160;180</additional_attributes></element><element><id>Relation</id><coordinates><x>448</x><y>352</y><w>176</w><h>56</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>10;10;200;50</additional_attributes></element><element><id>Relation</id><coordinates><x>448</x><y>288</y><w>176</w><h>88</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>10;90;200;10</additional_attributes></element><element><id>Relation</id><coordinates><x>312</x><y>232</y><w>112</w><h>88</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>120;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>944</x><y>424</y><w>120</w><h>88</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>130;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>944</x><y>280</y><w>104</w><h>232</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>50;10;10;270</additional_attributes></element><element><id>Relation</id><coordinates><x>872</x><y>280</y><w>136</w><h>128</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>140;10;10;140</additional_attributes></element><element><id>Relation</id><coordinates><x>872</x><y>272</y><w>128</w><h>40</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>140;20;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>488</y><w>104</w><h>80</h></coordinates><panel_attributes>lt=.
+</panel_attributes><additional_attributes>110;10;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>376</y><w>208</w><h>56</h></coordinates><panel_attributes>VerificationUrl
+--
+
+--
++ isValidUrl():Boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>24</x><y>456</y><w>208</w><h>56</h></coordinates><panel_attributes>VerificationMail
+--
+
+--
++ isValidMail():Boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>240</x><y>368</y><w>80</w><h>168</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>60;190;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>224</x><y>448</y><w>72</w><h>88</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>50;90;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>264</x><y>520</y><w>208</w><h>120</h></coordinates><panel_attributes>ContactManagementController
+--
+
+--
++ vCardExport(ActionEvent event) : void
++ jsonExport(ActionEvent event): Void
++ initialize(): Void
++ creer(): Void
++ modifier(): Void
++ supprimer(): Void
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>448</x><y>352</y><w>96</w><h>184</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>10;10;30;210</additional_attributes></element><element><id>Relation</id><coordinates><x>464</x><y>488</y><w>120</w><h>48</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>130;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>464</x><y>384</y><w>160</w><h>152</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>180;10;10;170</additional_attributes></element><element><id>Relation</id><coordinates><x>464</x><y>288</y><w>160</w><h>248</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>180;10;10;290</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>216</y><w>224</w><h>40</h></coordinates><panel_attributes>&lt;Jsonable&gt;
+com.github.cliftonlabs.json_simple.Jsonable;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>216</x><y>248</y><w>96</w><h>72</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>10;10;40;70</additional_attributes></element></diagram>
