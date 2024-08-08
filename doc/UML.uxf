@@ -1,67 +1,66 @@
-<diagram program="umletino" version="15.1"><zoom_level>9</zoom_level><element><id>UMLNote</id><coordinates><x>612</x><y>89</y><w>252</w><h>63</h></coordinates><panel_attributes>Note..
+<diagram program="umletino" version="15.1"><zoom_level>8</zoom_level><element><id>UMLNote</id><coordinates><x>712</x><y>72</y><w>224</w><h>56</h></coordinates><panel_attributes>Note..
 bg=orange
 Classes qui permettent d’effectuer 
 la sauvegarde des objets de la classe "Contact" 
-sous les différents formats attendus.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>135</x><y>260</y><w>189</w><h>45</h></coordinates><panel_attributes>&lt;interface&gt;
-java.io.Serializable</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>144</x><y>386</y><w>234</w><h>63</h></coordinates><panel_attributes>Contact
+sous les différents formats attendus.</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>488</x><y>200</y><w>168</w><h>40</h></coordinates><panel_attributes>&lt;interface&gt;
+java.io.Serializable</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>408</x><y>304</y><w>208</w><h>56</h></coordinates><panel_attributes>Contact
 --
 ContactManagement: Models
 --
-+ Contact implements Serializable, Jsonable</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>639</x><y>503</y><w>423</w><h>63</h></coordinates><panel_attributes>ContactBinarySerializer
++ Contact implements Serializable, Jsonable</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>736</x><y>440</y><w>376</w><h>56</h></coordinates><panel_attributes>ContactBinarySerializer
 --
 ContactManagement: Tools
 --
-+ ContactBinarySerializer implements Serializer&lt;Contact&gt;, Deserializer&lt;Contact&gt; </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>675</x><y>386</y><w>306</w><h>63</h></coordinates><panel_attributes>ContactVCardSerializer
++ ContactBinarySerializer implements Serializer&lt;Contact&gt;, Deserializer&lt;Contact&gt; </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>768</x><y>336</y><w>272</w><h>56</h></coordinates><panel_attributes>ContactVCardSerializer
 --
 ContactManagement: Tools
 --
-+ ContactvCardSerializer implements Serializer&lt;Contact&gt; </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>675</x><y>278</y><w>306</w><h>63</h></coordinates><panel_attributes>ContactJsonSerializer
++ ContactvCardSerializer implements Serializer&lt;Contact&gt; </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>768</x><y>240</y><w>272</w><h>56</h></coordinates><panel_attributes>ContactJsonSerializer
 --
 ContactManagement: Tools
 --
-+ ContactJsonSerializer implements Serializer&lt;Contact&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1170</x><y>404</y><w>243</w><h>90</h></coordinates><panel_attributes>&lt;interface&gt;
++ ContactJsonSerializer implements Serializer&lt;Contact&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1208</x><y>352</y><w>216</w><h>80</h></coordinates><panel_attributes>&lt;interface&gt;
 Deserializer&lt;T&gt;
 --
 ContactManagement: Tolls
 --
 + abstract T load(String filePath)
-+ abstract ArrayList&lt;T&gt; loadList(String filePath)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1098</x><y>242</y><w>351</w><h>90</h></coordinates><panel_attributes>&lt;interface&gt;
++ abstract ArrayList&lt;T&gt; loadList(String filePath)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1144</x><y>208</y><w>312</w><h>80</h></coordinates><panel_attributes>&lt;interface&gt;
 Serialiser&lt;T&gt;
 --
 ContactManagement: Tools
 --
 + abstract void save(String filePath, T objet)
-+ abstract void saveList(String filesPath, ArrayList&lt;T&gt; objectsToSave)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>513</x><y>629</y><w>216</w><h>54</h></coordinates><panel_attributes>Note..
++ abstract void saveList(String filesPath, ArrayList&lt;T&gt; objectsToSave)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>680</x><y>552</y><w>192</w><h>48</h></coordinates><panel_attributes>Note..
 bg=orange
 "ContactBinarySerializer" est le seul qui 
-implémente "Deserializer&lt;T&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>666</x><y>143</y><w>99</w><h>153</h></coordinates><panel_attributes>lt=.
-</panel_attributes><additional_attributes>10;10;90;150</additional_attributes></element><element><id>Relation</id><coordinates><x>369</x><y>440</y><w>288</w><h>144</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>10;10;300;140</additional_attributes></element><element><id>Relation</id><coordinates><x>369</x><y>431</y><w>324</w><h>36</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>10;20;340;20</additional_attributes></element><element><id>Relation</id><coordinates><x>369</x><y>332</y><w>324</w><h>135</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>10;130;340;10</additional_attributes></element><element><id>Relation</id><coordinates><x>216</x><y>296</y><w>99</w><h>108</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>1053</x><y>485</y><w>135</w><h>99</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>130;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1053</x><y>323</y><w>117</w><h>261</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>50;10;10;270</additional_attributes></element><element><id>Relation</id><coordinates><x>972</x><y>323</y><w>153</w><h>144</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>140;10;10;140</additional_attributes></element><element><id>Relation</id><coordinates><x>972</x><y>314</y><w>144</w><h>45</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>140;20;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>558</x><y>557</y><w>180</w><h>90</h></coordinates><panel_attributes>lt=.
-</panel_attributes><additional_attributes>180;10;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>108</x><y>485</y><w>234</w><h>63</h></coordinates><panel_attributes>VerificationUrl
+implémente "Deserializer&lt;T&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>120</y><w>88</w><h>136</h></coordinates><panel_attributes>lt=.
+</panel_attributes><additional_attributes>10;10;90;150</additional_attributes></element><element><id>Relation</id><coordinates><x>608</x><y>352</y><w>144</w><h>160</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>10;10;160;180</additional_attributes></element><element><id>Relation</id><coordinates><x>608</x><y>352</y><w>176</w><h>56</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>10;10;200;50</additional_attributes></element><element><id>Relation</id><coordinates><x>608</x><y>288</y><w>176</w><h>88</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>10;90;200;10</additional_attributes></element><element><id>Relation</id><coordinates><x>472</x><y>232</y><w>112</w><h>88</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>120;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1104</x><y>424</y><w>120</w><h>88</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>130;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>1104</x><y>280</y><w>104</w><h>232</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>50;10;10;270</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>280</y><w>136</w><h>128</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>140;10;10;140</additional_attributes></element><element><id>Relation</id><coordinates><x>1032</x><y>272</y><w>128</w><h>40</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>140;20;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>720</x><y>488</y><w>104</w><h>80</h></coordinates><panel_attributes>lt=.
+</panel_attributes><additional_attributes>110;10;10;80</additional_attributes></element><element><id>UMLClass</id><coordinates><x>200</x><y>376</y><w>208</w><h>56</h></coordinates><panel_attributes>VerificationUrl
 --
 ContactManagement: Tools
 --
-Regex</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>171</x><y>575</y><w>234</w><h>63</h></coordinates><panel_attributes>VerificationMail
++ isValidUrl():Boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>184</x><y>456</y><w>208</w><h>56</h></coordinates><panel_attributes>VerificationMail
 --
 ContactManagement: Tools
 --
-Regex</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>333</x><y>440</y><w>117</w><h>63</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>50;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>369</x><y>440</y><w>108</w><h>153</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>10;10;40;150</additional_attributes></element><element><id>UMLClass</id><coordinates><x>378</x><y>197</y><w>234</w><h>126</h></coordinates><panel_attributes>ContactManagementController
++ isValidMail():Boolean</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>400</x><y>368</y><w>80</w><h>168</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>60;190;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>384</x><y>448</y><w>72</w><h>88</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>50;90;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>424</x><y>520</y><w>208</w><h>48</h></coordinates><panel_attributes>ContactManagementController
 --
-ContactManagement: Controllers
---
-Controlleur
-Bouttons
-TextFields
-JsonExport
-VCardExport
-Initialize</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>369</x><y>314</y><w>99</w><h>90</h></coordinates><panel_attributes>lt=&lt;.
-&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>10;80;10;10</additional_attributes></element></diagram>
+ContactManagement: Controllers</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>608</x><y>352</y><w>96</w><h>184</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>10;10;30;210</additional_attributes></element><element><id>Relation</id><coordinates><x>624</x><y>488</y><w>120</w><h>48</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>130;10;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>624</x><y>384</y><w>160</w><h>152</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>180;10;10;170</additional_attributes></element><element><id>Relation</id><coordinates><x>624</x><y>288</y><w>160</w><h>248</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;users&gt;&gt;</panel_attributes><additional_attributes>180;10;10;290</additional_attributes></element><element><id>UMLClass</id><coordinates><x>160</x><y>216</y><w>224</w><h>40</h></coordinates><panel_attributes>&lt;Jsonable&gt;
+com.github.cliftonlabs.json_simple.Jsonable;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>376</x><y>248</y><w>96</w><h>72</h></coordinates><panel_attributes>lt=&lt;.
+&lt;&lt;implements&gt;&gt;</panel_attributes><additional_attributes>10;10;40;70</additional_attributes></element></diagram>
