@@ -80,8 +80,6 @@ public class ContactManagementController {
     @FXML
     private TextField lienGitField;
 
-    // ObservableList<String> comboBoxList = FXCollections.observableArrayList();
-
     /**
      * Méthode qui se déclenche sur un clic sur le bouton "Export JSon"
      * 
