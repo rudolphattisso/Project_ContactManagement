@@ -16,10 +16,6 @@ import fr.afpa.models.Contact;
 // Serialize(Contact contact) : Méthode vide, probablement destinée à être implémentée pour la sérialisation d'un seul objet Contact.
 public class ContactvCardSerializer implements Serializer<Contact> {
 
-    public void serialize(Contact contact) {
-
-    }
-
     // Paramètres : filesPath (chemin du fichier) et objectsToSave (liste d'objets
     // Contact à sauvegarder).
     // Implicitly target all declaration contexts by omitting a @Target annotation

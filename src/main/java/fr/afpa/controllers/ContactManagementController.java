@@ -261,15 +261,6 @@ public class ContactManagementController {
             if (genreSelection != "Choix du genre") {
                 genreComboBox.getStyleClass().add("error-field");
             }
-            // if (nomRempli == null) {
-            //     nomField.getStyleClass().add("error-field");
-            // }
-            // if (prenomRempli == null) {
-            //     prenomField.getStyleClass().add("error-field");
-            // }
-            // if (adresseRempli == null) {
-            //     adresseField.getStyleClass().add("error-field");
-            // }
 
 
         }
@@ -328,8 +319,8 @@ public class ContactManagementController {
                 tableViewContact.getItems().remove(selectedItem);
 
                 // serialisation binaire des contacts:
-                ContactBinarySerializer serializer = new ContactBinarySerializer();
-                serializer.saveList("contact.ser", new ArrayList<Contact>(contactsObservableList));
+                ContactBinarySerializer binarySerializer = new ContactBinarySerializer();
+                binarySerializer.saveList("contact.ser", new ArrayList<Contact>(contactsObservableList));
             }
         }
     }

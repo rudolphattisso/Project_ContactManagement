@@ -213,7 +213,7 @@ public class Contact implements Serializable, Jsonable {
 
         JsonObject jsonObject = new JsonObject();
         jsonObject.put("nom", this.getNom());
-        jsonObject.put("prénom", this.getPrenom());
+        jsonObject.put("prenom", this.getPrenom());
         jsonObject.put("genre", this.getGenre());
 
         // traitement de la date de naissance
@@ -226,7 +226,7 @@ public class Contact implements Serializable, Jsonable {
         jsonObject.put("adresse", this.getAdresse());
         jsonObject.put("telPerso", this.getTelPerso());
         jsonObject.put("mail", this.getMail());
-        jsonObject.put("code Postale", this.getCodePostale());
+        jsonObject.put("code_Postale", this.getCodePostale());
         jsonObject.put("lienGit", this.getLienGit());
 
         jsonObject.toJson(writable);
